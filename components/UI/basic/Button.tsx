@@ -27,7 +27,6 @@ const ButtonStyled = sys({
     py: 2,
     borderRadius: 2,
     border: 0,
-    WebkitFontSmoothing: 'antialiased',
     verticalAlign: 'middle',
     textAlign: 'center',
     textDecoration: 'none',

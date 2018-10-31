@@ -1,5 +1,5 @@
 {
-  "name": "Learn Japanese",
+  "name": "LearnJapanese",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@types/rebass": "^0.2.22",
-    "@zeit/next-typescript": "1.0.1",
+    "@zeit/next-typescript": "^1.0.1",
     "final-form": "^4.10.0",
-    "next": "latest",
+    "next": "^7.0.2",
     "prettier": "^1.13.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

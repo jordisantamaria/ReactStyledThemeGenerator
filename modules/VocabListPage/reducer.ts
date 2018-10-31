@@ -1,5 +1,6 @@
+import {CREATE_NEW_LIST, IVocabListAction} from './actions';
 
-interface IVocabListsState {
+export interface IVocabListsState {
   customLists: any[];
   reviewList: any[];
 }
@@ -8,8 +9,10 @@ export const initialState: IVocabListsState = {
   reviewList: []
 };
 
-function VocabListReducer(state = initialState, action) {
+function VocabListReducer(state = initialState, action: IVocabListAction) {
   switch (action.type) {
+    case CREATE_NEW_LIST:
+      return {customLists: [...state.customLists, action.payload.name]};
     default:
       return state;
   }
