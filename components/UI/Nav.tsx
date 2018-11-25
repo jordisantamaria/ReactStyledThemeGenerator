@@ -7,8 +7,9 @@ import Text from './basic/Text';
 const Nav = () => {
   return (
   <Flex
-    bg={'yellow'}
+    bg={'primary'}
     justifyContent={'space-between'}
+    color={'white'}
   >
     <Box
       p={3}

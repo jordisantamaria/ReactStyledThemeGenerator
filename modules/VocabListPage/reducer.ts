@@ -5,8 +5,8 @@ export interface IVocabListsState {
   reviewList: any[];
 }
 export const initialState: IVocabListsState = {
-  customLists: [],
-  reviewList: []
+  customLists: ['Test'],
+  reviewList: ['Reviw']
 };
 
 function VocabListReducer(state = initialState, action: IVocabListAction) {

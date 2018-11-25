@@ -3,7 +3,7 @@ import sys from 'system-components'
 export interface IBox {
   fontSize?: number | number[];
   css?: Object;
-  m?: number;
+  m?: number | string;
   mt?: number;
   mr?: number;
   mb?: number;
@@ -33,6 +33,7 @@ export interface IBox {
 }
 
 const css = props => props.css;
+
 
 const BoxStyled = sys(
   'space',

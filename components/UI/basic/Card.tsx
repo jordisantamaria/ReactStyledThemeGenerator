@@ -1,9 +1,9 @@
 import * as React from 'react';
 import sys from 'system-components'
-import {IBox} from './Box';
 import { variant } from 'styled-system'
+import {default as Flex, IFlex} from './Flex';
 
-interface IButton extends IBox{
+interface ICard extends IFlex{
   border?: string;
   borderColor?: string;
   borderRadius?: string;
@@ -17,10 +17,11 @@ const cardVariants = variant({
 })
 
 export const CardStyled = sys({
+    is: Flex,
     p: 2,
-    bg: 'white',
     borderRadius: 2,
-    boxShadow: 2
+    boxShadow: 2,
+    variant: 'primaryLight',
   }, {
     overflow: 'hidden'
   },
@@ -28,7 +29,7 @@ export const CardStyled = sys({
   cardVariants
 );
 
-const Card = (props: IButton) => {
+const Card = (props: ICard) => {
   return (
     <CardStyled {...props}/>
   );

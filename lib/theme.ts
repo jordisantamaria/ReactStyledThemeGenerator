@@ -1,11 +1,9 @@
+import {Colors} from './Colors';
 export default {
   fontSizes: [
     12, 14, 16, 20, 24, 32, 48, 64
   ],
-  colors: {
-    blue: 'blue',
-    lightgray: '#f6f6ff',
-  },
+  colors: {...Colors},
   space: [
     0, 4, 8, 16, 32, 64, 128, 256
   ],
@@ -22,18 +20,23 @@ export default {
   ],
   buttons: {
     primary: {
-      color: 'white',
-      backgroundColor: 'red',
+      color: Colors.white,
+      backgroundColor: Colors.secondary,
     },
     outline: {
-      color: 'red',
-      backgroundColor: 'transparent',
+      color: Colors.primaryDark,
+      backgroundColor: Colors.white,
       boxShadow: 'inset 0 0 0 2px',
       ':hover': {
-        backgroundColor: 'red',
-        color: 'white',
-        boxShadow: '3px 6px'
+        backgroundColor: Colors.primaryDark,
+        color: Colors.white,
+        boxShadow: 'none',
       }
+    }
+  },
+  cards: {
+    primaryLight: {
+      backgroundColor: Colors.primaryLight
     }
   }
 

@@ -9,6 +9,7 @@ interface IButton extends IBox{
   borderColor?: string;
   borderRadius?: string;
   variant?: string;
+  onClick: () => void;
 }
 
 const buttonVariants = variant({
@@ -44,6 +45,7 @@ const ButtonStyled = sys({
   }),
   buttonVariants,
   'color',
+  'width',
   css,
 )
 

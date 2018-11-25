@@ -2,7 +2,7 @@ import * as React from 'react';
 import {default as Box, IBox} from './Box';
 import sys from 'system-components'
 
-interface Iprops extends IBox {
+export interface IFlex extends IBox {
   flexWrap?: string;
   flexDirection?: string;
   alignItems?: string;
@@ -18,7 +18,7 @@ const FlexStyled = sys({
   'flexDirection',
   'flexWrap',
 )
-const Flex = (props: Iprops) => {
+const Flex = (props: IFlex) => {
   return (
     <FlexStyled {...props}/>
   );
