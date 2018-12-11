@@ -6,7 +6,7 @@ import {IState} from '../lib/store/rootReducer';
 import {connect} from 'react-redux';
 import Container from '../components/UI/Container';
 import OpenModalButton from '../components/UI/modals/OpenModalButton';
-import CreateVocabListModal from '../components/UI/modals/CreateVocabListModal';
+import CreateVocabListModal from '../components/UI/modals/CreateVocabListModal/CreateVocabListModal';
 import Flex from '../components/UI/basic/Flex';
 
 interface IProps {
@@ -32,9 +32,11 @@ class Index extends React.Component<IProps, any> {
         Mis listas
       </Heading>
       <Container>
-        <ListGroup listName={'Repaso'} list={this.props.reviewList}/>
-        <ListGroup listName={'Vocabulario'} list={this.props.customLists}/>
-        <Flex justifyContent={'center'}>
+        {this.props.reviewList && this.props.reviewList.length > 0 &&
+          <ListGroup listName={'Repaso'} lists={this.props.reviewList}/>
+        }
+        <ListGroup listName={'Vocabulario'} lists={this.props.customLists}/>
+        <Flex justifyContent={'center'} mt={3}>
           <OpenModalButton modal={<CreateVocabListModal/>}>
             Crear nueva lista
           </OpenModalButton>

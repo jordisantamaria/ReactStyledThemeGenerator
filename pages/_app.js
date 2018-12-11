@@ -66,6 +66,7 @@ injectGlobal`
 .icon-pencil:before { content: '\\e801'; } /* '' */
 .icon-plus-circled:before { content: '\\e802'; } /* '' */
 .icon-trash-empty:before { content: '\\e803'; } /* '' */
+.icon-cancel:before { content: '\\e804'; } /* '' */
 `
 class MyApp extends App {
   render () {

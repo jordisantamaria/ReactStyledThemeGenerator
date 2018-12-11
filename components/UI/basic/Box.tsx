@@ -30,6 +30,7 @@ export interface IBox {
   borderRadius?: string;
   position?: string;
   is?: string;
+  onClick?: () => void;
 }
 
 const css = props => props.css;
@@ -40,7 +41,6 @@ const BoxStyled = sys(
   'color',
   'fontSize',
   'width',
-  'borders ',
   'position',
   css,
 );

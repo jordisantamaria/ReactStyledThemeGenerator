@@ -37,6 +37,12 @@ export default {
   cards: {
     primaryLight: {
       backgroundColor: Colors.primaryLight
+    },
+    primary: {
+      backgroundColor: Colors.primary
+    },
+    secondary: {
+      backgroundColor: Colors.secondary
     }
   }
 

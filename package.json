@@ -9,7 +9,12 @@
   "dependencies": {
     "@types/rebass": "^0.2.22",
     "@zeit/next-typescript": "^1.0.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
     "final-form": "^4.10.0",
+    "graphql": "^14.0.2",
+    "graphql-server-express": "^1.4.0",
+    "graphql-tools": "^4.0.3",
     "next": "^7.0.2",
     "prettier": "^1.13.5",
     "react": "^16.2.0",

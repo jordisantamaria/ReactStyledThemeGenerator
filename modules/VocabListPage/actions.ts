@@ -1,17 +1,19 @@
+import { IVocabList } from "./reducer";
+
 export const CREATE_NEW_LIST = "CREATE_NEW_LIST";
 
 export interface IVocabListAction {
   type: string;
   payload?: {
-    name?: string;
+    list?: IVocabList;
   }
 }
 
-export function createNewList(name: string): IVocabListAction {
+export function createNewList(list: IVocabList): IVocabListAction {
   return {
     type: CREATE_NEW_LIST,
     payload: {
-      name,
+      list,
     },
   };
 }

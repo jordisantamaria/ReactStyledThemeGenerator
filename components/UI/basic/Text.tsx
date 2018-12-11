@@ -9,6 +9,7 @@ export interface IText extends IBox{
   letterSpacing?: string;
 }
 export const TextStyled = sys({
+    is: 'p',
     m: 0
   },
   'space',
