@@ -1,16 +1,46 @@
 const { makeExecutableSchema } = require('graphql-tools')
 
 const typeDefs = `
-  type Curso {
+  type VocabList {
     id: ID!
-    titulo: String!
+    listName: String!
+    vocabItemList: [VocabItem]
+  }
+  
+  type VocabItem {
+    id: ID!
+    word: String!
+    translation: String!
+    pronunciation: String
+    association: String
   }
 
   type Query {
-    cursos: [Curso]
+    vocabLists: [VocabList]
+    vocabList(listName: String): VocabList
+    vocabItem(id: Int): VocabItem
   }
 `
 
-const schema = makeExecutableSchema({ typeDefs })
+const resolvers = {
+  Query: {
+    vocabLists: () => {
+      return [{
+        id: 1,
+        listName: 'Mi primera lista',
+        vocabItemList: []
+      }]
+    },
+    vocabItem: (id) => {
+      return {
+        id,
+        word: 'Hello',
+        translation: 'Hola'
+      }
+    }
+  }
+}
+
+const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 module.exports = schema

@@ -4,18 +4,24 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "startApi": "nodemon ./api/index.js",
+    "db:migrate": "knex migrate:latest --knexfile=db/knexfile.js",
+    "db:seed": "knex seed:run --knexfile=db/knexfile.js"
   },
   "dependencies": {
     "@types/rebass": "^0.2.22",
     "@zeit/next-typescript": "^1.0.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "filepath": "^1.1.0",
     "final-form": "^4.10.0",
     "graphql": "^14.0.2",
     "graphql-server-express": "^1.4.0",
     "graphql-tools": "^4.0.3",
+    "knex": "^0.13.0",
     "next": "^7.0.2",
+    "objection": "^1.4.0",
     "prettier": "^1.13.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -27,6 +33,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.2",
     "rodal": "^1.6.3",
+    "sqlite3": "^4.0.4",
     "styled-components": "3.3.3",
     "styled-react-modal": "^1.1.2",
     "styled-system": "^3.1.6",
@@ -35,7 +42,8 @@
   "devDependencies": {
     "@types/next": "^2.4.7",
     "@types/react": "^16.0.36",
-    "babel-plugin-styled-components": "1.5.1"
+    "babel-plugin-styled-components": "1.5.1",
+    "nodemon": "^1.18.8"
   },
   "license": "ISC"
 }
