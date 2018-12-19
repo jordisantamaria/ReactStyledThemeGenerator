@@ -5,9 +5,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "startApi": "nodemon ./api/index.js",
-    "db:migrate": "knex migrate:latest --knexfile=db/knexfile.js",
-    "db:seed": "knex seed:run --knexfile=db/knexfile.js"
+    "startApi": "nodemon ./api/index.js"
   },
   "dependencies": {
     "@types/rebass": "^0.2.22",
@@ -19,9 +17,8 @@
     "graphql": "^14.0.2",
     "graphql-server-express": "^1.4.0",
     "graphql-tools": "^4.0.3",
-    "knex": "^0.13.0",
+    "mysql2": "^1.6.4",
     "next": "^7.0.2",
-    "objection": "^1.4.0",
     "prettier": "^1.13.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -33,7 +30,7 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.2",
     "rodal": "^1.6.3",
-    "sqlite3": "^4.0.4",
+    "sequelize": "^4.42.0",
     "styled-components": "3.3.3",
     "styled-react-modal": "^1.1.2",
     "styled-system": "^3.1.6",
