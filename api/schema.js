@@ -1,4 +1,5 @@
 const { makeExecutableSchema } = require('graphql-tools')
+const {VocabList, VocabItem} = require('./models');
 
 const typeDefs = `
   type VocabList {
@@ -17,27 +18,24 @@ const typeDefs = `
 
   type Query {
     vocabLists: [VocabList]
-    vocabList(listName: String): VocabList
+    vocabList(id: Int): VocabList
     vocabItem(id: Int): VocabItem
   }
 `
 
 const resolvers = {
   Query: {
-    vocabLists: () => {
-      return [{
-        id: 1,
-        listName: 'Mi primera lista',
-        vocabItemList: []
-      }]
-    },
+    vocabLists: () => VocabList.findAll().then(function(vocabLists) {
+        return vocabLists;
+      }),
     vocabItem: (id) => {
       return {
         id,
         word: 'Hello',
         translation: 'Hola'
       }
-    }
+    },
+    vocabList: (rootValue, args) => VocabList.findById(args.id)
   }
 }
 

@@ -21,9 +21,22 @@ app.use(
 
 const PORT = 5678
 
-models.sequelize.sync().then(function() {
-  app.listen(PORT, () => {
-    console.log('Servidor corriendo OK')
-  })
+models.sequelize.sync()
+  /*.then(function() {
+    models.VocabList.findById(1).then(function(vocabList1) {
+      console.log("vocabList1 = ", vocabList1);
+      models.VocabItem.create({
+        word: 'Wellcome',
+        pronunciation: 'Wellcom',
+        translation: 'Bienvienido'
+      }).then(function(vocabItem) {
+        vocabList1.addVocabItem(vocabItem);
+      })
+    });
+  })*/
+  .then(function() {
+    app.listen(PORT, () => {
+      console.log('Servidor corriendo OK')
+    })
 });
 
