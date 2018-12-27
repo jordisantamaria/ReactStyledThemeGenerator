@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "startApi": "nodemon ./api/index.js"
+    "start:client": "next start",
+    "start:server": "nodemon ./api/index.js",
+    "start": "concurrently -r \"npm run start:server\" \"npm run start:client\""
   },
   "dependencies": {
     "@types/rebass": "^0.2.22",

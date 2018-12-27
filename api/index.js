@@ -23,6 +23,11 @@ const PORT = 5678
 
 models.sequelize.sync()
   /*.then(function() {
+    models.VocabList.create({
+      listName: 'Lista de prueba'
+    })
+  })*/
+  .then(function() {
     models.VocabList.findById(1).then(function(vocabList1) {
       console.log("vocabList1 = ", vocabList1);
       models.VocabItem.create({
@@ -33,7 +38,7 @@ models.sequelize.sync()
         vocabList1.addVocabItem(vocabItem);
       })
     });
-  })*/
+  })
   .then(function() {
     app.listen(PORT, () => {
       console.log('Servidor corriendo OK')
