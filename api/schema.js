@@ -8,10 +8,21 @@ const typeDefs = `
     vocabItemList: [VocabItem]
   }
   
+  input NewVocabList {
+    listName: String!
+  }
+  
   type VocabItem {
     id: ID!
     word: String!
     translation: String!
+    pronunciation: String
+    association: String
+  }
+  
+  input NewVocabItem {
+    word: String
+    translation: String
     pronunciation: String
     association: String
   }
@@ -20,6 +31,10 @@ const typeDefs = `
     vocabLists: [VocabList]
     vocabList(id: Int): VocabList
     vocabItem(id: Int): VocabItem
+  }
+  
+  type Mutation {
+    vocabListAdd(vocabList: NewVocabList): VocabList
   }
 `
 
@@ -36,6 +51,20 @@ const resolvers = {
       }
     },
     vocabList: (rootValue, args) => VocabList.findById(args.id)
+  },
+  Mutation: {
+    vocabListAdd: (_, args) => {
+      console.log("Add vocab list mutation, listName = ", args.vocabList.listName);
+      return VocabList.create({
+        listName: args.vocabList.listName
+      })
+        /*.then(function(vocabList1) {
+        VocabItem.create(args.vocabList.vocabItemList)
+          .then(function(vocabItem) {
+          vocabList1.addVocabItem(vocabItem);
+        })
+      })*/
+    }
   }
 }
 

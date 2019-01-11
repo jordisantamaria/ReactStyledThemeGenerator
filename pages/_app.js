@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import {injectGlobal, ThemeProvider} from 'styled-components';
 import theme from '../lib/theme';
 import { ModalProvider } from 'styled-react-modal'
+import withApolloClient from '../lib/apollo/with-apollo-client'
+import { ApolloProvider } from 'react-apollo'
 
 injectGlobal`
   * { box-sizing: border-box; margin: 0; }
@@ -70,19 +72,21 @@ injectGlobal`
 `
 class MyApp extends App {
   render () {
-    const {Component, pageProps, reduxStore} = this.props
+    const {Component, pageProps, reduxStore, apolloClient} = this.props
     return (
     <Container>
       <Provider store={reduxStore}>
-        <ThemeProvider theme={theme}>
-          <ModalProvider>
-            <Component {...pageProps} />
-          </ModalProvider>
-        </ThemeProvider>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider theme={theme}>
+            <ModalProvider>
+              <Component {...pageProps} />
+            </ModalProvider>
+          </ThemeProvider>
+        </ApolloProvider>
       </Provider>
     </Container>
     )
   }
 }
 
-export default withReduxStore(MyApp)
+export default withReduxStore(withApolloClient(MyApp));

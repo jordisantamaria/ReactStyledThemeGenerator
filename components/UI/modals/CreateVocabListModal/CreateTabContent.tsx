@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Form, Field } from 'react-final-form'
-import {connect} from 'react-redux';
-import { createNewList } from "../../../../modules/VocabListPage/actions";
 import { IVocabList } from "../../../../modules/VocabListPage/reducer";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
 
 interface Iprops {
   createNewList: (list: IVocabList) => void;
@@ -10,75 +10,37 @@ interface Iprops {
 }
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-const CreateTabContent = (props: Iprops) => {
-  const onSubmit = async values => {
-    await sleep(300)
-    const {listName, ...listValues} = values;
-    const list: IVocabList = {
-      listName: listName,
-      vocabItemsList: [{...listValues}]
+const ADD_VOCABLIST = gql`
+  mutation addList($vocabList: NewVocabList!) {
+    vocabListAdd(vocabList: $vocabList) {
+      id
     }
-    props.createNewList(list);
+  }
+`;
+const CreateTabContent = (props: Iprops) => {
+  const onSubmit = async (values, addVocabList) => {
+    // const {listName, ...listValues} = values;
+    /*const list= {
+      listName: listName,
+      //vocabItemList: [{...listValues}]
+    }*/
+    console.log("On Submit create list, addVocab = ", addVocabList);
+    const list = values.listName ? values.listName : 'lista sin nombre';
+    const id = addVocabList({variables: {vocabList: list}});
+    console.log("lista a;adida, id = ", id);
     props.closeModal();
   }
   return (
-    <Form
-      onSubmit={onSubmit}
-      render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nombre de la lista</label>
-            <Field
-              name="listName"
-              component="input"
-              type="text"
-              placeholder="Nombre de la lista"
-            />
-          </div>
-          <div>
-            <label>Palabra a aprender</label>
-            <Field
-              name="word"
-              component="input"
-              type="text"
-              placeholder="Palabra"
-            />
-          </div>
-          <div>
-            <label>Traducción</label>
-            <Field name="translation" component="input" type="text" />
-          </div>
-          <div>
-            <label>Pronunciación</label>
-            <Field name="pronunciation" component="input" type="text" />
-          </div>
-          <div>
-            <label>Asociación</label>
-            <Field name="association" component="input" type="text" />
-          </div>
-          <div className="buttons">
-            <button type="submit" disabled={submitting || pristine}>
-              Submit
-            </button>
-            <button
-              type="button"
-              onClick={form.reset}
-              disabled={submitting || pristine}
-            >
-              Reset
-            </button>
-          </div>
-          <pre>{JSON.stringify(values, 0, 2)}</pre>
-        </form>
+    <Mutation mutation={ADD_VOCABLIST}>
+      {(addVocabList) => (
+        <div onClick={() => {
+          addVocabList({variables: {vocabList: {listName: 'Lista on click'}}})
+        }}>
+          Click me
+        </div>
       )}
-    />
+    </Mutation>
   );
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createNewList: (list: IVocabList) => {
-      dispatch(createNewList(list))
-    }
-  }
-}
-export default connect(null, mapDispatchToProps)(CreateTabContent);
+
+export default CreateTabContent;

@@ -3,8 +3,11 @@ const bodyParser = require('body-parser')
 const { graphqlExpress, graphiqlExpress } = require('graphql-server-express')
 const schema = require('./schema')
 const models = require('./models');
+const cors = require('cors')
 
 const app = express()
+
+app.use(cors())
 
 app.use(
   '/graphql',
@@ -21,13 +24,13 @@ app.use(
 
 const PORT = 5678
 
-models.sequelize.sync()
+models.sequelize.sync({force: true})
   /*.then(function() {
     models.VocabList.create({
       listName: 'Lista de prueba'
     })
   })*/
-  .then(function() {
+/*  .then(function() {
     models.VocabList.findById(1).then(function(vocabList1) {
       console.log("vocabList1 = ", vocabList1);
       models.VocabItem.create({
@@ -38,7 +41,7 @@ models.sequelize.sync()
         vocabList1.addVocabItem(vocabItem);
       })
     });
-  })
+  })*/
   .then(function() {
     app.listen(PORT, () => {
       console.log('Servidor corriendo OK')

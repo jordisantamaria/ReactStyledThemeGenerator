@@ -8,6 +8,8 @@ import Container from '../components/UI/Container';
 import OpenModalButton from '../components/UI/modals/OpenModalButton';
 import CreateVocabListModal from '../components/UI/modals/CreateVocabListModal/CreateVocabListModal';
 import Flex from '../components/UI/basic/Flex';
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
 interface IProps {
   customLists: any[];
@@ -25,6 +27,7 @@ class Index extends React.Component<IProps, any> {
     this.setState( {clicked: !this.state.clicked})
   }
   public render() {
+    console.log("render index");
     return (
     <BaseLayout description={'Home'} title={'Home'}>
       <Heading fontSize={22} px={3} py={2} color={'primaryDark'} bg={'secondaryLight'} mb={2}
@@ -35,7 +38,23 @@ class Index extends React.Component<IProps, any> {
         {this.props.reviewList && this.props.reviewList.length > 0 &&
           <ListGroup listName={'Repaso'} lists={this.props.reviewList}/>
         }
-        <ListGroup listName={'Vocabulario'} lists={this.props.customLists}/>
+        <Query
+          query={gql`
+          {
+            vocabLists {
+              listName
+            }
+          }
+        `}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error :(</p>;
+            console.log("vocabaLists query data = ", data);
+            return <ListGroup listName={'Vocabulario'} lists={data.vocabLists}/>;
+          }}
+        </Query>
+
         <Flex justifyContent={'center'} mt={3}>
           <OpenModalButton modal={<CreateVocabListModal/>}>
             Crear nueva lista
