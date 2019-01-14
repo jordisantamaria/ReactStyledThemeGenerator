@@ -1,7 +1,14 @@
 {
   "name": "LearnJapanese",
   "version": "1.0.0",
+  "lint-staged": {
+    "src/**/*.{ts, tsx, js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  },
   "scripts": {
+    "precommit": "lint-staged",
     "build": "next build",
     "startBuild": "next start",
     "start:client": "next",
@@ -16,7 +23,8 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "filepath": "^1.1.0",
-    "final-form": "^4.10.0",
+    "final-form": "^4.11.0",
+    "final-form-arrays": "^1.1.1",
     "graphql": "^14.0.2",
     "graphql-server-express": "^1.4.0",
     "graphql-tools": "^4.0.3",
@@ -27,7 +35,8 @@
     "react": "^16.2.0",
     "react-apollo": "^2.3.3",
     "react-dom": "^16.2.0",
-    "react-final-form": "^3.6.5",
+    "react-final-form": "^4.0.2",
+    "react-final-form-arrays": "^2.0.1",
     "react-redux": "^5.0.7",
     "rebass": "2.0.0-9",
     "redux": "^4.0.0",

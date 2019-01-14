@@ -20,6 +20,7 @@ const TabList = (props: IProps) => {
         return React.cloneElement(el, {
           isActiveTab: props.activeTab === index,
           setActiveTab: setActiveTab(index),
+          key: index
         })
       })}
     </Card>
