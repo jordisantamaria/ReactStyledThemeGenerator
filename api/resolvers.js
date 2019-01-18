@@ -1,34 +1,49 @@
-const {VocabList, VocabItem} = require('./models');
+const { VocabList, VocabItem } = require("./models");
 
 const resolvers = {
   Query: {
-    vocabLists: () => VocabList.findAll().then(function(vocabLists) {
-      return vocabLists;
-    }),
-    vocabItem: (id) => {
+    vocabLists: () =>
+      VocabList.findAll().then(function(vocabLists) {
+        return vocabLists;
+      }),
+    //Todo: devolver el item de la bd
+    vocabItem: id => {
       return {
         id,
-        word: 'Hello',
-        translation: 'Hola'
-      }
+        word: "Hello",
+        translation: "Hola"
+      };
     },
-    vocabList: (rootValue, args) => VocabList.findById(args.id)
+    vocabList: (rootValue, args) =>
+      VocabList.findById(args.id, { include: [{ model: VocabItem }] }),
+    vocabListByListName: (rootValue, args) => {
+      return VocabList.findOne({
+        where: {
+          listName: args.listName
+        },
+        include: [{ model: VocabItem }]
+      }).then(function(vocabList) {
+        return vocabList;
+      });
+    }
   },
   Mutation: {
     vocabListAdd: (_, args) => {
-      console.log("Add vocab list mutation, listName = ", args.vocabList.listName);
-      console.log("Add vocab list mutation, vocab items list  = ", args.vocabList.vocabItemsList);
       return VocabList.create({
         listName: args.vocabList.listName
-      })
-      /*.then(function(vocabList1) {
-      VocabItem.create(args.vocabList.vocabItemList)
-        .then(function(vocabItem) {
-        vocabList1.addVocabItem(vocabItem);
-      })
-    })*/
+      }).then(function(vocabList1) {
+        if (args.vocabList.VocabItems) {
+          // creamos los items y los linkamos a la lista
+          VocabItem.bulkCreate(args.vocabList.VocabItems).then(function(
+            vocabItems
+          ) {
+            vocabList1.addVocabItems(vocabItems);
+          });
+        }
+        return vocabList1;
+      });
     }
   }
-}
+};
 
 module.exports = resolvers;

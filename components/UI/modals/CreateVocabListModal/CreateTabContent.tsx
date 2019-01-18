@@ -1,40 +1,52 @@
-import * as React from 'react';
-import { Form, Field } from 'react-final-form'
+import * as React from "react";
+import { Form, Field } from "react-final-form";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import { FieldArray } from "react-final-form-arrays";
-import arrayMutators from 'final-form-arrays'
+import arrayMutators from "final-form-arrays";
+import { GET_LIST_NAMES_QUERY } from "../../../../pages";
 
 interface Iprops {
   closeModal: () => void;
 }
-const required = value => (value ? undefined : 'Required')
+export const required = value => (value ? undefined : "Required");
 
-const ADD_VOCABLIST = gql`
+export const ADD_VOCABLIST = gql`
   mutation addList($vocabList: NewVocabList!) {
     vocabListAdd(vocabList: $vocabList) {
-      id
+      listName
     }
   }
 `;
 const CreateTabContent = (props: Iprops) => {
   return (
-    <Mutation mutation={ADD_VOCABLIST}>
-      {(addVocabList) => (
+    <Mutation
+      mutation={ADD_VOCABLIST}
+      update={(cache, { data }) => {
+        //cuando no son datos puros, ejemplo listas, hay que añadir manualmente los nuevos datos a la cache de graphql
+        const { vocabLists } = cache.readQuery({ query: GET_LIST_NAMES_QUERY });
+        cache.writeQuery({
+          query: GET_LIST_NAMES_QUERY,
+          data: { vocabLists: vocabLists.concat([data.vocabListAdd]) }
+        });
+      }}
+    >
+      {addVocabList => (
         <React.Fragment>
           <Form
-            onSubmit={({listName, vocabItemList}: any) => {
-              const list = {vocabList: {
+            onSubmit={({ listName, VocabItems }: any) => {
+              const list = {
+                vocabList: {
                   listName,
-                  vocabItemList,
-                }};
-              console.log("list to add = ", list);
-              addVocabList({variables: list});
+                  VocabItems
+                }
+              };
+              addVocabList({ variables: list });
               props.closeModal();
             }}
-            mutators={{...arrayMutators}}
+            mutators={{ ...arrayMutators }}
           >
-            {({handleSubmit}) => (
+            {({ handleSubmit }) => (
               <form onSubmit={handleSubmit.bind(addVocabList)}>
                 <div>
                   <label>List Name</label>
@@ -45,8 +57,8 @@ const CreateTabContent = (props: Iprops) => {
                     validate={required}
                   />
                 </div>
-                <FieldArray name={'vocabItemsList'}>
-                  {({fields}) => (
+                <FieldArray name={"VocabItems"}>
+                  {({ fields }) => (
                     <div>
                       {fields.map((name, index) => (
                         <div key={name}>
@@ -62,21 +74,31 @@ const CreateTabContent = (props: Iprops) => {
                           </div>
                           <div>
                             <label>Traducción</label>
-                            <Field name={`${name}.translation`} component="input" type="text" />
+                            <Field
+                              name={`${name}.translation`}
+                              component="input"
+                              type="text"
+                            />
                           </div>
                           <div>
                             <label>Pronunciación</label>
-                            <Field name={`${name}.pronunciation`} component="input" type="text" />
+                            <Field
+                              name={`${name}.pronunciation`}
+                              component="input"
+                              type="text"
+                            />
                           </div>
                           <div>
                             <label>Asociación</label>
-                            <Field name={`${name}.association`} component="input" type="text" />
+                            <Field
+                              name={`${name}.association`}
+                              component="input"
+                              type="text"
+                            />
                           </div>
                         </div>
                       ))}
-                      <button
-                        type="button"
-                        onClick={() => fields.push({})}>
+                      <button type="button" onClick={() => fields.push({})}>
                         Añadir palabra
                       </button>
                     </div>
@@ -84,19 +106,24 @@ const CreateTabContent = (props: Iprops) => {
                 </FieldArray>
                 <div>
                   <button type="submit">Submit</button>
-                </div>x
+                </div>
+                x
               </form>
             )}
           </Form>
-          <div onClick={() => {
-            addVocabList({variables: {vocabList: {listName: 'Lista on click'}}})
-          }}>
+          <div
+            onClick={() => {
+              addVocabList({
+                variables: { vocabList: { listName: "Lista on click" } }
+              });
+            }}
+          >
             Click me
           </div>
         </React.Fragment>
       )}
     </Mutation>
   );
-}
+};
 
 export default CreateTabContent;

@@ -1,12 +1,10 @@
-import App, {Container} from 'next/app'
-import React from 'react'
-import withReduxStore from '../lib/store/with-redux-store'
-import { Provider } from 'react-redux'
-import {injectGlobal, ThemeProvider} from 'styled-components';
-import theme from '../lib/theme';
-import { ModalProvider } from 'styled-react-modal'
-import withApolloClient from '../lib/apollo/with-apollo-client'
-import { ApolloProvider } from 'react-apollo'
+import App, { Container } from "next/app";
+import React from "react";
+import { injectGlobal, ThemeProvider } from "styled-components";
+import theme from "../lib/theme";
+import { ModalProvider } from "styled-react-modal";
+import withApolloClient from "../lib/apollo/with-apollo-client";
+import { ApolloProvider } from "react-apollo";
 
 injectGlobal`
   * { box-sizing: border-box; margin: 0; }
@@ -69,13 +67,12 @@ injectGlobal`
 .icon-plus-circled:before { content: '\\e802'; } /* '' */
 .icon-trash-empty:before { content: '\\e803'; } /* '' */
 .icon-cancel:before { content: '\\e804'; } /* '' */
-`
+`;
 class MyApp extends App {
-  render () {
-    const {Component, pageProps, reduxStore, apolloClient} = this.props
+  render() {
+    const { Component, pageProps, reduxStore, apolloClient } = this.props;
     return (
-    <Container>
-      <Provider store={reduxStore}>
+      <Container>
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <ModalProvider>
@@ -83,10 +80,9 @@ class MyApp extends App {
             </ModalProvider>
           </ThemeProvider>
         </ApolloProvider>
-      </Provider>
-    </Container>
-    )
+      </Container>
+    );
   }
 }
 
-export default withReduxStore(withApolloClient(MyApp));
+export default withApolloClient(MyApp);

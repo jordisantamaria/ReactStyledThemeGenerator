@@ -2,11 +2,11 @@ module.exports = `
  type VocabList {
     id: ID!
     listName: String!
-    vocabItemList: [VocabItem]
+    VocabItems: [VocabItem]
   }
   
   input NewVocabList {
     listName: String!
-    vocabItemList: [NewVocabItem]
+    VocabItems: [NewVocabItem]
   }
-`
+`;

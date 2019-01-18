@@ -1,36 +1,33 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const { graphqlExpress, graphiqlExpress } = require('graphql-server-express')
-const schema = require('./schema')
-const models = require('./models');
-const cors = require('cors')
+const express = require("express");
+const bodyParser = require("body-parser");
+const { graphqlExpress, graphiqlExpress } = require("graphql-server-express");
+const schema = require("./schema");
+const models = require("./models");
+const cors = require("cors");
 
-const app = express()
+const app = express();
 
-app.use(cors())
+app.use(cors());
 
-app.use(
-  '/graphql',
-  bodyParser.json(),
-  graphqlExpress({ schema })
-)
+app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
 
 app.use(
-  '/graphiql',
+  "/graphiql",
   graphiqlExpress({
-    endpointURL: '/graphql'
+    endpointURL: "/graphql"
   })
-)
+);
 
-const PORT = 5678
+const PORT = 5678;
 
-models.sequelize.sync({force: true})
+models.sequelize
+  .sync(/*{force: true}*/)
   /*.then(function() {
     models.VocabList.create({
       listName: 'Lista de prueba'
     })
   })*/
-/*  .then(function() {
+  /*  .then(function() {
     models.VocabList.findById(1).then(function(vocabList1) {
       console.log("vocabList1 = ", vocabList1);
       models.VocabItem.create({
@@ -44,7 +41,6 @@ models.sequelize.sync({force: true})
   })*/
   .then(function() {
     app.listen(PORT, () => {
-      console.log('Servidor corriendo OK')
-    })
-});
-
+      console.log("Servidor corriendo OK");
+    });
+  });

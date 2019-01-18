@@ -14,53 +14,52 @@ const StyledModal = Modal.styled`
   width: 100%;
   height: 100%;
   background-color: ${props => props.theme.colors.white};
-`
-
+`;
 
 interface Iprops {
   isOpen?: boolean;
   toggleModal?: () => void;
 }
 const CreateVocabListModal = (props: Iprops) => {
-  console.log('props = ', props);
+  console.log("props = ", props);
   return (
-  <StyledModal
-    isOpen={props.isOpen}
-    onBackgroundClick={props.toggleModal}
-    onEscapeKeydown={props.toggleModal}>
-    <Box>
-      <Card
-        variant="primary"
-        justifyContent={'center'}
-        p={3}
-        position={'relative'}
-      >
-        <Text>Nueva lista de vocab</Text>
-        <Icon
-          className="icon-cancel"
-          color={'white'}
-          position={'absolute'}
-          css={{right: '20px'}}
-          onClick={props.toggleModal}
-        />
-      </Card>
-      <Tabs>
-        <TabList>
-          <Tab>Crear</Tab>
-          <Tab>Importar</Tab>
-        </TabList>
-        <TabPanel>
-          <CreateTabContent closeModal={props.toggleModal}/>
-        </TabPanel>
-        <TabPanel>
-          <div>List name</div>
-          <div>Contenido a importar</div>
-        </TabPanel>
-      </Tabs>
-    </Box>
-
-  </StyledModal>
+    <StyledModal
+      isOpen={props.isOpen}
+      onBackgroundClick={props.toggleModal}
+      onEscapeKeydown={props.toggleModal}
+    >
+      <Box>
+        <Card
+          variant="primary"
+          justifyContent={"center"}
+          p={3}
+          position={"relative"}
+        >
+          <Text>Nueva lista de vocab</Text>
+          <Icon
+            className="icon-cancel"
+            color={"white"}
+            position={"absolute"}
+            css={{ right: "20px" }}
+            onClick={props.toggleModal}
+          />
+        </Card>
+        <Tabs>
+          <TabList>
+            <Tab>Crear</Tab>
+            <Tab>Importar</Tab>
+          </TabList>
+          <TabPanel>
+            <CreateTabContent closeModal={props.toggleModal} />
+          </TabPanel>
+          <TabPanel>
+            <div>List name</div>
+            <div>Contenido a importar</div>
+          </TabPanel>
+        </Tabs>
+      </Box>
+    </StyledModal>
   );
-}
+};
 
 export default CreateVocabListModal;
