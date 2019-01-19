@@ -1,36 +1,30 @@
-import {Colors} from './Colors';
+import { Colors } from "./Colors";
 export default {
-  fontSizes: [
-    12, 14, 16, 20, 24, 32, 48, 64
-  ],
-  colors: {...Colors},
-  space: [
-    0, 4, 8, 16, 32, 64, 128, 256
-  ],
+  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
+  colors: { ...Colors },
+  space: [0, 4, 8, 16, 32, 64, 128, 256],
   fonts: {
-    sans: 'system-ui, sans-serif',
-    mono: 'Menlo, monospace',
+    sans: "system-ui, sans-serif",
+    mono: "Menlo, monospace"
   },
   shadows: {
-    small: '0 0 4px rgba(0, 0, 0, .125)',
-    large: '0 0 24px rgba(0, 0, 0, .125)'
+    small: "0 0 4px rgba(0, 0, 0, .125)",
+    large: "0 0 24px rgba(0, 0, 0, .125)"
   },
-  breakpoints: [
-    0, 560, 780, 1200
-  ],
+  breakpoints: [0, 560, 780, 1200],
   buttons: {
     primary: {
       color: Colors.white,
-      backgroundColor: Colors.secondary,
+      backgroundColor: Colors.secondary
     },
     outline: {
       color: Colors.primaryDark,
       backgroundColor: Colors.white,
-      boxShadow: 'inset 0 0 0 2px',
-      ':hover': {
+      boxShadow: "inset 0 0 0 2px",
+      ":hover": {
         backgroundColor: Colors.primaryDark,
         color: Colors.white,
-        boxShadow: 'none',
+        boxShadow: "none"
       }
     }
   },
@@ -43,7 +37,12 @@ export default {
     },
     secondary: {
       backgroundColor: Colors.secondary
+    },
+    outlinePrimary: {
+      boxShadow: `inset 0px 0px 23px -5px ${Colors.primary}`
+    },
+    outlineSecondary: {
+      boxShadow: `inset 0px 0px 23px -5px ${Colors.secondary}`
     }
   }
-
-}
+};

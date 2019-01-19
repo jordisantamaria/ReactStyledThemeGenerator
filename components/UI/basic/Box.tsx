@@ -1,22 +1,22 @@
-import sys from 'system-components'
+import sys from "system-components";
 
 export interface IBox {
   fontSize?: number | number[];
   css?: Object;
   m?: number | string;
-  mt?: number;
-  mr?: number;
-  mb?: number;
-  ml?: number;
-  mx?: number;
-  my?: number;
-  p?: number;
-  pt?: number;
-  pr?: number;
-  pb?: number;
-  pl?: number;
-  px?: number;
-  py?: number;
+  mt?: number | string;
+  mr?: number | string;
+  mb?: number | string;
+  ml?: number | string;
+  mx?: number | string;
+  my?: number | string;
+  p?: number | string;
+  pt?: number | string;
+  pr?: number | string;
+  pb?: number | string;
+  pl?: number | string;
+  px?: number | string;
+  py?: number | string;
   width?: number | string | any[];
   color?: string;
   bg?: string;
@@ -35,17 +35,7 @@ export interface IBox {
 
 const css = props => props.css;
 
+const BoxStyled = sys("space", "color", "fontSize", "width", "position", css);
 
-const BoxStyled = sys(
-  'space',
-  'color',
-  'fontSize',
-  'width',
-  'position',
-  css,
-);
-
-const Box = (props: IBox) => (
-  <BoxStyled {...props}/>
-)
+const Box = (props: IBox) => <BoxStyled {...props} />;
 export default Box;

@@ -1,13 +1,13 @@
 import Modal from "styled-react-modal";
 import * as React from "react";
-import Tabs from "../../tabs/Tabs";
-import TabList from "../../tabs/TabList";
-import Tab from "../../tabs/Tab";
-import TabPanel from "../../tabs/TabPanel";
-import Box from "../../basic/Box";
-import Card from "../../basic/Card";
-import Text from "../../basic/Text";
-import Icon from "../../basic/Icon";
+import Tabs from "../../../../components/UI/tabs/Tabs";
+import TabList from "../../../../components/UI/tabs/TabList";
+import Tab from "../../../../components/UI/tabs/Tab";
+import TabPanel from "../../../../components/UI/tabs/TabPanel";
+import Box from "../../../../components/UI/basic/Box";
+import Card from "../../../../components/UI/basic/Card";
+import Text from "../../../../components/UI/basic/Text";
+import Icon from "../../../../components/UI/basic/Icon";
 import CreateTabContent from "./CreateTabContent";
 
 const StyledModal = Modal.styled`

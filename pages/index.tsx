@@ -4,10 +4,12 @@ import BaseLayout from "../components/BaseLayout";
 import ListGroup from "../modules/VocabListPage/components/ListGroup";
 import Container from "../components/UI/Container";
 import OpenModalButton from "../components/UI/modals/OpenModalButton";
-import CreateVocabListModal from "../components/UI/modals/CreateVocabListModal/CreateVocabListModal";
+import CreateVocabListModal from "../modules/VocabListPage/components/CreateVocabListModal/CreateVocabListModal";
 import Flex from "../components/UI/basic/Flex";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import { Button } from "../components/UI/basic";
+import { Colors } from "../lib/Colors";
 
 interface IProps {
   customLists: any[];
@@ -45,7 +47,7 @@ class Index extends React.Component<IProps, any> {
           mb={2}
           css={{
             background:
-              "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(129,224,255,1) 100%);"
+              "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(129,224,255,1) 150%);"
           }}
         >
           Mis listas
@@ -67,7 +69,9 @@ class Index extends React.Component<IProps, any> {
 
           <Flex justifyContent={"center"} mt={3}>
             <OpenModalButton modal={<CreateVocabListModal />}>
-              Crear nueva lista
+              <Button width={4 / 5} color={Colors.primaryDark}>
+                Crear nueva lista
+              </Button>
             </OpenModalButton>
           </Flex>
         </Container>
