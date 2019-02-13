@@ -10,10 +10,13 @@ const rootQuery = `
     vocabList(id: Int): VocabList
     vocabListByListName(listName: String): VocabList
     vocabItem(id: Int): VocabItem
+    vocabItemsReview: VocabList
   }
   
   type Mutation {
     vocabListAdd(vocabList: NewVocabList): VocabList
+    vocabItemLearned(id: Int): VocabItem
+    vocabItemsReviewed(vocabItems: NewVocabList): VocabList
   }
 `;
 

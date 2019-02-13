@@ -5,6 +5,7 @@ module.exports = `
     translation: String!
     pronunciation: String
     association: String
+    learned: Boolean
   }
   
   input NewVocabItem {
@@ -15,4 +16,4 @@ module.exports = `
   }
   
   
-`
+`;

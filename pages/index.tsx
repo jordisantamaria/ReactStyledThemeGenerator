@@ -8,7 +8,7 @@ import CreateVocabListModal from "../modules/VocabListPage/components/CreateVoca
 import Flex from "../components/UI/basic/Flex";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import { Button } from "../components/UI/basic";
+import { Box, Button } from "../components/UI/basic";
 import { Colors } from "../lib/Colors";
 
 interface IProps {
@@ -20,6 +20,22 @@ export const GET_LIST_NAMES_QUERY = gql`
   {
     vocabLists {
       listName
+    }
+  }
+`;
+
+export const GET_REVIEW_LIST_ITEMS_QUERY = gql`
+  {
+    vocabItemsReview {
+      listName
+      VocabItems {
+        id
+        word
+        translation
+        pronunciation
+        association
+        learned
+      }
     }
   }
 `;
@@ -38,24 +54,39 @@ class Index extends React.Component<IProps, any> {
     console.log("render index");
     return (
       <BaseLayout description={"Home"} title={"Home"}>
-        <Heading
-          fontSize={22}
-          px={3}
-          py={2}
-          color={"primaryDark"}
-          bg={"secondaryLight"}
-          mb={2}
+        <Box
           css={{
             background:
               "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(129,224,255,1) 150%);"
           }}
         >
-          Mis listas
-        </Heading>
+          <Heading
+            fontSize={22}
+            px={3}
+            py={2}
+            color={"primaryDark"}
+            mb={2}
+            m={"auto"}
+            css={{ maxWidth: "1000px" }}
+          >
+            Mis listas
+          </Heading>
+        </Box>
         <Container>
-          {this.props.reviewList && this.props.reviewList.length > 0 && (
-            <ListGroup listName={"Repaso"} lists={this.props.reviewList} />
-          )}
+          <Query query={GET_REVIEW_LIST_ITEMS_QUERY}>
+            {({ loading, error, data }) => {
+              if (loading) return <p>Loading...</p>;
+              if (error) return <p>Error :(</p>;
+              console.log("vocabaLists query data = ", data);
+              return (
+                <ListGroup
+                  listName={data.vocabItemsReview.listName}
+                  lists={[data.vocabItemsReview]}
+                  review={true}
+                />
+              );
+            }}
+          </Query>
           <Query query={GET_LIST_NAMES_QUERY}>
             {({ loading, error, data }) => {
               if (loading) return <p>Loading...</p>;

@@ -8,6 +8,7 @@ export interface IVocabList {
   VocabItems: IVocabItem[];
 }
 export interface IVocabItem {
+  id?: any;
   word: string;
   translation: string;
   pronunciation: string;

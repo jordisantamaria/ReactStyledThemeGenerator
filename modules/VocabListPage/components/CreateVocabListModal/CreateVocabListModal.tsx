@@ -9,6 +9,7 @@ import Card from "../../../../components/UI/basic/Card";
 import Text from "../../../../components/UI/basic/Text";
 import Icon from "../../../../components/UI/basic/Icon";
 import CreateTabContent from "./CreateTabContent";
+import ImportTabContent from "./ImportTabContent";
 
 const StyledModal = Modal.styled`
   width: 100%;
@@ -53,8 +54,7 @@ const CreateVocabListModal = (props: Iprops) => {
             <CreateTabContent closeModal={props.toggleModal} />
           </TabPanel>
           <TabPanel>
-            <div>List name</div>
-            <div>Contenido a importar</div>
+            <ImportTabContent closeModal={props.toggleModal} />
           </TabPanel>
         </Tabs>
       </Box>

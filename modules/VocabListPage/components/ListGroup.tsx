@@ -13,6 +13,7 @@ import { isPair } from "../../../lib/utils";
 interface IProps {
   listName: string;
   lists: IVocabList[];
+  review?: boolean;
 }
 const ListGroup = (props: IProps) => {
   console.log("customLists = ", props.lists);
@@ -27,20 +28,34 @@ const ListGroup = (props: IProps) => {
             p={"10px"}
             variant={!isPair(index) ? "outlinePrimary" : "outlineSecondary"}
           >
-            <Link
-              as={`/list/${listName}`}
-              href={`/myList?listName=${listName}`}
-            >
-              <Text
-                mr={2}
-                css={{ cursor: "pointer" }}
-                color={
-                  !isPair(index) ? Colors.primaryText : Colors.secondaryDark
-                }
+            {props.review ? (
+              <Link href={`/ReviewList`}>
+                <Text
+                  mr={2}
+                  css={{ cursor: "pointer" }}
+                  color={
+                    !isPair(index) ? Colors.primaryText : Colors.secondaryDark
+                  }
+                >
+                  {`${props.lists[0].VocabItems.length} por repasar`}
+                </Text>
+              </Link>
+            ) : (
+              <Link
+                as={`/list/${listName}`}
+                href={`/myList?listName=${listName}`}
               >
-                {listName}
-              </Text>
-            </Link>
+                <Text
+                  mr={2}
+                  css={{ cursor: "pointer" }}
+                  color={
+                    !isPair(index) ? Colors.primaryText : Colors.secondaryDark
+                  }
+                >
+                  {listName}
+                </Text>
+              </Link>
+            )}
             <Flex css={{ borderRadius: "4px" }}>
               <Icon className="icon-plus-circled" color={"secondary"} />
               <Icon className="icon-pencil" color={"secondary"} />

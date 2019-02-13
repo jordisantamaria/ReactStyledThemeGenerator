@@ -14,14 +14,44 @@ const resolvers = {
         translation: "Hola"
       };
     },
+    vocabItemsReview: (rootValue, args) =>
+      VocabItem.findAll({
+        where: {
+          learned: true
+        },
+        include: [
+          {
+            model: VocabList
+          }
+        ]
+      }).then(function(VocabItems) {
+        console.log("vocab review = ", {
+          listName: "Lista de repaso",
+          VocabItems
+        });
+        return { listName: "Lista de repaso", VocabItems };
+      }),
     vocabList: (rootValue, args) =>
-      VocabList.findById(args.id, { include: [{ model: VocabItem }] }),
+      VocabList.findById(args.id, {
+        include: [
+          {
+            model: VocabItem
+          }
+        ]
+      }),
     vocabListByListName: (rootValue, args) => {
       return VocabList.findOne({
         where: {
           listName: args.listName
         },
-        include: [{ model: VocabItem }]
+        include: [
+          {
+            model: VocabItem,
+            where: {
+              learned: false
+            }
+          }
+        ]
       }).then(function(vocabList) {
         return vocabList;
       });
@@ -42,6 +72,11 @@ const resolvers = {
         }
         return vocabList1;
       });
+    },
+    vocabItemLearned: (_, args) => {
+      return VocabItem.findById(args.id).then(item =>
+        item.update({ learned: true })
+      );
     }
   }
 };
