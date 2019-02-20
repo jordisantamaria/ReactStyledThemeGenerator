@@ -5,6 +5,8 @@ const VocabItem = require("./VocabItem");
 
 const rootQuery = `
 
+  scalar Date
+  
   type Query {
     vocabLists: [VocabList]
     vocabList(id: Int): VocabList

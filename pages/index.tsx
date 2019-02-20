@@ -78,13 +78,13 @@ class Index extends React.Component<IProps, any> {
               if (loading) return <p>Loading...</p>;
               if (error) return <p>Error :(</p>;
               console.log("vocabaLists query data = ", data);
-              return (
+              return data.vocabItemsReview ? (
                 <ListGroup
                   listName={data.vocabItemsReview.listName}
                   lists={[data.vocabItemsReview]}
                   review={true}
                 />
-              );
+              ) : null;
             }}
           </Query>
           <Query query={GET_LIST_NAMES_QUERY}>

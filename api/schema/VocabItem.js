@@ -6,6 +6,8 @@ module.exports = `
     pronunciation: String
     association: String
     learned: Boolean
+    toReviewDate: Date
+    toReviewDelay: Int
   }
   
   input NewVocabItem {

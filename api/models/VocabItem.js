@@ -2,11 +2,13 @@ module.exports = (sequelize, DataTypes) => {
   let VocabItem = sequelize.define("VocabItem", {
     word: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notEmpty: true
     },
     translation: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      notEmpty: true
     },
     pronunciation: {
       type: DataTypes.STRING
@@ -15,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    toReviewDate: DataTypes.STRING,
+    toReviewDelay: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1
     },
     association: DataTypes.STRING
   });
