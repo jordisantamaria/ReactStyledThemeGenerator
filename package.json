@@ -11,7 +11,7 @@
     "build": "next build",
     "startBuild": "next start",
     "start:client": "node server.js",
-    "start:server": "nodemon ./api/index.js",
+    "start:server": "nodemon ./api/index.js --exec babel-node",
     "start": "concurrently -r \"npm run start:server\" \"npm run start:client\""
   },
   "dependencies": {
@@ -53,6 +53,9 @@
     "ts-node": "^8.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "@types/next": "^2.4.7",
     "@types/react": "^16.0.36",
     "babel-plugin-styled-components": "1.5.1",

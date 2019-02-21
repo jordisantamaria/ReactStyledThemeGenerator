@@ -1,4 +1,10 @@
-const { VocabList, VocabItem } = require("./models");
+import { GraphQLScalarType } from "graphql";
+import { Kind } from "graphql/language";
+import dayjs from "dayjs";
+
+const { VocabList, VocabItem, Sequelize } = require("./models");
+const Op = Sequelize.Op;
+
 const resolvers = {
   Query: {
     vocabLists: () =>
@@ -16,7 +22,9 @@ const resolvers = {
     vocabItemsReview: (rootValue, args) =>
       VocabItem.findAll({
         where: {
-          learned: true
+          toReviewDate: {
+            [Op.lte]: dayjs().format("MM-DD-YYYY")
+          }
         },
         include: [
           {
@@ -50,7 +58,7 @@ const resolvers = {
           {
             model: VocabItem,
             where: {
-              learned: false
+              toReviewDate: null
             }
           }
         ]
@@ -79,14 +87,30 @@ const resolvers = {
       });
     },
     vocabItemLearned: (_, args) => {
-      /*const date = dayjs();
-      const toReviewDate = date.add(1, "day");*/
-      const toReviewDate = new Date();
+      const date = dayjs();
+      const toReviewDate = date.add(1, "day").format("MM-DD-YYYY");
+      console.log("toReviewDate = ", toReviewDate);
       return VocabItem.findById(args.id).then(item =>
-        item.update({ learned: true, toReviewDate })
+        item.update({ toReviewDate })
       );
     }
-  }
+  },
+  Date: new GraphQLScalarType({
+    name: "Date",
+    description: "Custom description for the date scalar",
+    parseValue(value) {
+      return dayjs(value); // value from the client
+    },
+    serialize(value) {
+      return dayjs(value).format("MM-DD-YYYY"); // value sent to the client
+    },
+    parseLiteral(ast) {
+      if (ast.kind === Kind.STRING) {
+        return dayjs(ast.value); // ast value is always in string format
+      }
+      return null;
+    }
+  })
 };
 
 module.exports = resolvers;

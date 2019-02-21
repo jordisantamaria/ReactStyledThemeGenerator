@@ -34,7 +34,6 @@ export const GET_REVIEW_LIST_ITEMS_QUERY = gql`
         translation
         pronunciation
         association
-        learned
       }
     }
   }

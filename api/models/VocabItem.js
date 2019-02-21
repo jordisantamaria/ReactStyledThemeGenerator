@@ -13,11 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     pronunciation: {
       type: DataTypes.STRING
     },
-    learned: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    },
     toReviewDate: DataTypes.STRING,
     toReviewDelay: {
       type: DataTypes.INTEGER,

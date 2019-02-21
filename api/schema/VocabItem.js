@@ -5,7 +5,6 @@ module.exports = `
     translation: String!
     pronunciation: String
     association: String
-    learned: Boolean
     toReviewDate: Date
     toReviewDelay: Int
   }
