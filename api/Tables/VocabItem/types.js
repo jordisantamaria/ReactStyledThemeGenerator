@@ -16,5 +16,13 @@ module.exports = `
     association: String
   }
   
+  extend type Query {
+    vocabItem(id: Int): VocabItem
+    vocabItemsReview: VocabList
+  }
   
+  extend type Mutation {
+    vocabItemLearned(id: Int): VocabItem
+    vocabItemsReviewed(ids: [ID]): [VocabItem]
+  }
 `;

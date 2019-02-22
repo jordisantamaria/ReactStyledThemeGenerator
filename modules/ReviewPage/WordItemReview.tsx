@@ -8,7 +8,7 @@ interface IProps {
   className?: string;
   item: IVocabItem;
   index: number;
-  reviewed: (item: IVocabItem) => void;
+  reviewed: (id: number) => void;
 }
 
 interface IState {
@@ -29,7 +29,7 @@ class WordItemReview extends React.Component<IProps, IState> {
   private toogleOpen = () => {
     console.log("toogle open");
     if (!this.state.isAlreadyReviewed) {
-      this.props.reviewed(this.props.item);
+      this.props.reviewed(this.props.item.id);
       this.setState(state => ({
         isOpen: !state.isOpen,
         isAlreadyReviewed: true

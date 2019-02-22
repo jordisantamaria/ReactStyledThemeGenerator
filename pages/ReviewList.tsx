@@ -2,39 +2,43 @@ import * as React from "react";
 import Heading from "../components/UI/basic/Heading";
 import BaseLayout from "../components/BaseLayout";
 import { withRouter } from "next/router";
-import { Query } from "react-apollo";
+import { Mutation, Query } from "react-apollo";
 import { Box, Button, Flex, Text } from "../components/UI/basic";
-import { IVocabItem, IVocabList } from "../modules/VocabListPage/model";
+import { IVocabItem } from "../modules/VocabListPage/model";
 import Container from "../components/UI/Container";
 import { WordItemReview } from "../modules/ReviewPage/WordItemReview";
 import { GET_REVIEW_LIST_ITEMS_QUERY } from "./index";
-import uniq from "lodash/uniq";
+import { gql } from "apollo-boost";
 
 interface IState {
-  itemsReviewed: IVocabList;
+  itemsReviewedId: number[];
 }
 interface Iprops {
   router: any;
 }
 
+export const UPDATE_ITEMS_REVIEWED = gql`
+  mutation updateReviewedItems($ids: [ID!]) {
+    vocabItemsReviewed(ids: $ids) {
+      toReviewDate
+    }
+  }
+`;
+
 class MyList extends React.Component<Iprops, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      itemsReviewed: {
-        listName: null,
-        VocabItems: []
-      }
+      itemsReviewedId: []
     };
   }
 
-  public addItemReviewed = item => {
-    console.log("item have been reviewed ", item);
+  public addItemReviewed = id => {
+    console.log("item have been reviewed ", id);
+    console.log("item reviewed added type is ", typeof id);
+
     this.setState(state => ({
-      itemsReviewed: {
-        listName: state.itemsReviewed.listName,
-        VocabItems: uniq([...state.itemsReviewed.VocabItems, item])
-      }
+      itemsReviewedId: [...state.itemsReviewedId, id]
     }));
   };
 
@@ -48,15 +52,14 @@ class MyList extends React.Component<Iprops, IState> {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error :(</p>;
-            const vocabItems = data.vocabItemsReview.VocabItems;
-            if (this.state.itemsReviewed.listName === null) {
-              this.setState(state => ({
-                itemsReviewed: {
-                  listName: data.vocabItemsReview.listName,
-                  VocabItems: state.itemsReviewed.VocabItems
-                }
-              }));
+            if (
+              !data ||
+              !data.vocabItemsReview ||
+              !data.vocabItemsReview.VocabItems
+            ) {
+              return null;
             }
+            const vocabItems = data.vocabItemsReview.VocabItems;
             console.log("vocab items = ", vocabItems);
             return (
               <React.Fragment>
@@ -100,13 +103,21 @@ class MyList extends React.Component<Iprops, IState> {
           }}
         </Query>
         <Flex justifyContent={"center"} my={3}>
-          <Button
-            onClick={() => {
-              console.log("items to review = ", this.state.itemsReviewed);
-            }}
-          >
-            Finalizar Repaso
-          </Button>
+          {/*fer que en update, borrar la llista de repas*/}
+          <Mutation mutation={UPDATE_ITEMS_REVIEWED}>
+            {updateItems => (
+              <Button
+                onClick={() => {
+                  console.log("finalizar repaso, update items");
+                  updateItems({
+                    variables: { ids: this.state.itemsReviewedId }
+                  });
+                }}
+              >
+                Finalizar Repaso
+              </Button>
+            )}
+          </Mutation>
         </Flex>
       </BaseLayout>
     );
