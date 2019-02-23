@@ -9,6 +9,7 @@ import Container from "../components/UI/Container";
 import { WordItemReview } from "../modules/ReviewPage/WordItemReview";
 import { GET_REVIEW_LIST_ITEMS_QUERY } from "./index";
 import { gql } from "apollo-boost";
+import Link from "next/link";
 
 interface IState {
   itemsReviewedId: number[];
@@ -104,18 +105,29 @@ class MyList extends React.Component<Iprops, IState> {
         </Query>
         <Flex justifyContent={"center"} my={3}>
           {/*fer que en update, borrar la llista de repas*/}
-          <Mutation mutation={UPDATE_ITEMS_REVIEWED}>
+          <Mutation
+            mutation={UPDATE_ITEMS_REVIEWED}
+            update={cache => {
+              //cuando no son datos puros, ejemplo listas, hay que añadir manualmente los nuevos datos a la cache de graphql
+              cache.writeQuery({
+                query: GET_REVIEW_LIST_ITEMS_QUERY,
+                data: { vocabItemsReview: null }
+              });
+            }}
+          >
             {updateItems => (
-              <Button
-                onClick={() => {
-                  console.log("finalizar repaso, update items");
-                  updateItems({
-                    variables: { ids: this.state.itemsReviewedId }
-                  });
-                }}
-              >
-                Finalizar Repaso
-              </Button>
+              <Link href={"/"}>
+                <Button
+                  onClick={() => {
+                    console.log("finalizar repaso, update items");
+                    updateItems({
+                      variables: { ids: this.state.itemsReviewedId }
+                    });
+                  }}
+                >
+                  Finalizar Repaso
+                </Button>
+              </Link>
             )}
           </Mutation>
         </Flex>
