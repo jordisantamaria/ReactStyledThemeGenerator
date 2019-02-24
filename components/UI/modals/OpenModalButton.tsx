@@ -17,7 +17,6 @@ class OpenModalButton extends React.Component<Iprops, IState> {
   }
 
   public toggleModal = () => {
-    console.log("open Modal");
     this.setState(state => ({
       isOpen: !state.isOpen
     }));

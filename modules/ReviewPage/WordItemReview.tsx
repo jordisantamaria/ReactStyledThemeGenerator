@@ -23,11 +23,9 @@ class WordItemReview extends React.Component<IProps, IState> {
       isOpen: false,
       isAlreadyReviewed: false
     };
-    console.log("item = ", this.props.item);
   }
 
   private toogleOpen = () => {
-    console.log("toogle open");
     if (!this.state.isAlreadyReviewed) {
       this.props.reviewed(this.props.item.id);
       this.setState(state => ({

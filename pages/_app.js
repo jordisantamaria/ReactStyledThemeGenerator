@@ -69,6 +69,11 @@ injectGlobal`
 .icon-cancel:before { content: '\\e804'; } /* '' */
 `;
 class MyApp extends App {
+  componentDidCatch(error, errorInfo) {
+    console.log("componentDidCatch error = ", error);
+    super.componentDidCatch(error, errorInfo);
+  }
+
   render() {
     const { Component, pageProps, reduxStore, apolloClient } = this.props;
     return (

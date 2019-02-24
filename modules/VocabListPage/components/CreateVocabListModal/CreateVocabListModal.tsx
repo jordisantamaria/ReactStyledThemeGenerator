@@ -22,7 +22,6 @@ interface Iprops {
   toggleModal?: () => void;
 }
 const CreateVocabListModal = (props: Iprops) => {
-  console.log("props = ", props);
   return (
     <StyledModal
       isOpen={props.isOpen}

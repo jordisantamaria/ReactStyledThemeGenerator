@@ -33,11 +33,9 @@ class WordItem extends React.Component<IProps, IState> {
     this.state = {
       isOpen: false
     };
-    console.log("item = ", this.props.item);
   }
 
   private toogleOpen = () => {
-    console.log("toogle open");
     this.setState(state => ({
       isOpen: !state.isOpen
     }));

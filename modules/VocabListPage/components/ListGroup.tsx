@@ -16,7 +16,6 @@ interface IProps {
   review?: boolean;
 }
 const ListGroup = (props: IProps) => {
-  console.log("customLists = ", props.lists);
   return (
     <Box>
       <Heading mb={2} fontSize={3}>

@@ -50,7 +50,6 @@ class Index extends React.Component<IProps, any> {
     this.setState({ clicked: !this.state.clicked });
   };
   public render() {
-    console.log("render index");
     return (
       <BaseLayout description={"Home"} title={"Home"}>
         <Box
@@ -76,7 +75,6 @@ class Index extends React.Component<IProps, any> {
             {({ loading, error, data }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <p>Error :(</p>;
-              console.log("vocabaLists query data = ", data);
               return data.vocabItemsReview ? (
                 <ListGroup
                   listName={data.vocabItemsReview.listName}
@@ -90,7 +88,6 @@ class Index extends React.Component<IProps, any> {
             {({ loading, error, data }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <p>Error :(</p>;
-              console.log("vocabaLists query data = ", data);
               return (
                 <ListGroup listName={"Vocabulario"} lists={data.vocabLists} />
               );

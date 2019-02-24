@@ -35,9 +35,6 @@ class MyList extends React.Component<Iprops, IState> {
   }
 
   public addItemReviewed = id => {
-    console.log("item have been reviewed ", id);
-    console.log("item reviewed added type is ", typeof id);
-
     this.setState(state => ({
       itemsReviewedId: [...state.itemsReviewedId, id]
     }));
@@ -61,7 +58,6 @@ class MyList extends React.Component<Iprops, IState> {
               return null;
             }
             const vocabItems = data.vocabItemsReview.VocabItems;
-            console.log("vocab items = ", vocabItems);
             return (
               <React.Fragment>
                 <Box
@@ -119,7 +115,6 @@ class MyList extends React.Component<Iprops, IState> {
               <Link href={"/"}>
                 <Button
                   onClick={() => {
-                    console.log("finalizar repaso, update items");
                     updateItems({
                       variables: { ids: this.state.itemsReviewedId }
                     });

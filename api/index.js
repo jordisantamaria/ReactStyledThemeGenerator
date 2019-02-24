@@ -1,46 +1,45 @@
+import { UserType } from "./Tables/User/types";
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlExpress, graphiqlExpress } = require("graphql-server-express");
-const schema = require("./schema");
 const models = require("./models");
-const cors = require("cors");
+import { DateType } from "./ScalarTypes/Date";
+import { merge } from "lodash";
+import { VocabItemResolver } from "./Tables/VocabItem/resolver";
+import { VocabListResolver } from "./Tables/VocabList/resolver";
+import { UserResolver } from "./Tables/User/resolver";
 
-const app = express();
+const VocabListType = require("./Tables/VocabList/types");
+const VocabItemType = require("./Tables/VocabItem/types");
+const { ApolloServer, gql } = require("apollo-server");
 
-app.use(cors());
+const rootQuery = gql`
+  scalar Date
 
-app.use("/graphql", bodyParser.json(), graphqlExpress({ schema }));
+  type Query {
+    _empty: String
+  }
 
-app.use(
-  "/graphiql",
-  graphiqlExpress({
-    endpointURL: "/graphql"
-  })
+  type Mutation {
+    _empty: String
+  }
+`;
+
+const resolvers = merge(
+  DateType,
+  VocabItemResolver,
+  VocabListResolver,
+  UserResolver
 );
 
-const PORT = 5678;
+const server = new ApolloServer({
+  typeDefs: [rootQuery, VocabListType, VocabItemType, UserType],
+  resolvers
+});
 
-models.sequelize
-  .sync(/*{force: true}*/)
-  /*.then(function() {
-    models.VocabList.create({
-      listName: 'Lista de prueba'
-    })
-  })*/
-  /*  .then(function() {
-    models.VocabList.findById(1).then(function(vocabList1) {
-      console.log("vocabList1 = ", vocabList1);
-      models.VocabItem.create({
-        word: 'Wellcome',
-        pronunciation: 'Wellcom',
-        translation: 'Bienvienido'
-      }).then(function(vocabItem) {
-        vocabList1.addVocabItem(vocabItem);
-      })
-    });
-  })*/
-  .then(function() {
-    app.listen(PORT, () => {
-      console.log("Servidor corriendo OK");
-    });
+models.sequelize.sync(/*{force: true}*/).then(function() {
+  server.listen().then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
   });
+});

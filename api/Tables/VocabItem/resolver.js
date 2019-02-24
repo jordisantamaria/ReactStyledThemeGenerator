@@ -8,7 +8,7 @@ const updateReviewDate = delay => {
 };
 
 const resetReviewDate = () => {
-  const date = dayjs();
+  const date = dayjs(); //parse
   return date.add(1, "day").format("MM-DD-YYYY");
 };
 
