@@ -1,5 +1,5 @@
 {
-  "name": "LearnJapanese",
+  "name": "learn-japanese",
   "version": "1.0.0",
   "main": "server.js",
   "husky": {
@@ -8,7 +8,10 @@
     }
   },
   "scripts": {
-    "test": "ava api/tests/ --verbose",
+    "testBackend": "ava api/tests/ --verbose",
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
     "precommit": "lint-staged",
     "build": "next build",
     "startBuild": "next start",
@@ -22,6 +25,7 @@
     "apollo-boost": "^0.1.23",
     "apollo-server": "^2.4.6",
     "apollo-server-express": "^2.4.6",
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dayjs": "^1.8.6",
@@ -64,14 +68,21 @@
     "@types/next": "^2.4.7",
     "@types/react": "^16.0.36",
     "ava": "^1.3.1",
+    "babel-jest": "^24.3.0",
     "babel-plugin-styled-components": "1.5.1",
+    "babel-polyfill": "^6.26.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
     "husky": "^1.3.1",
+    "jest": "^24.3.0",
     "nodemon": "^1.18.8",
     "nyc": "^13.3.0",
     "pretty-quick": "^1.8.0",
     "proxyquire": "^2.1.0",
+    "react-test-renderer": "^16.8.4",
     "sinon": "^7.2.7",
     "sqlite3": "^4.0.6"
   },
+  "author": "Jordi Santamaria <santjordporto@hotmail.com>",
   "license": "ISC"
 }

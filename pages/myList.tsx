@@ -68,6 +68,9 @@ class MyList extends React.Component<Iprops, IState> {
             {({ loading, error, data }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <p>Error :(</p>;
+              if (!data.vocabListByListName) {
+                return <p>No hay palabras disponibles para estudiar</p>;
+              }
               const vocabItems = data.vocabListByListName.VocabItems;
               return vocabItems.map((item: IVocabItem, index) => (
                 <WordItem

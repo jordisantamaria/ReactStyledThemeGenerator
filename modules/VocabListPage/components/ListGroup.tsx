@@ -25,7 +25,7 @@ const ListGroup = (props: IProps) => {
         props.lists.map(({ listName }, index) => (
           <ListItem
             p={"10px"}
-            variant={!isPair(index) ? "outlinePrimary" : "outlineSecondary"}
+            variant={isPair(index) ? "outlinePrimary" : "outlineSecondary"}
           >
             {props.review ? (
               <Link href={`/ReviewList`}>
@@ -33,7 +33,7 @@ const ListGroup = (props: IProps) => {
                   mr={2}
                   css={{ cursor: "pointer" }}
                   color={
-                    !isPair(index) ? Colors.primaryText : Colors.secondaryDark
+                    isPair(index) ? Colors.primaryText : Colors.secondaryDark
                   }
                 >
                   {`${props.lists[0].VocabItems.length} por repasar`}
@@ -48,7 +48,7 @@ const ListGroup = (props: IProps) => {
                   mr={2}
                   css={{ cursor: "pointer" }}
                   color={
-                    !isPair(index) ? Colors.primaryText : Colors.secondaryDark
+                    isPair(index) ? Colors.primaryText : Colors.secondaryDark
                   }
                 >
                   {listName}

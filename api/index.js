@@ -14,6 +14,16 @@ const VocabListType = require("./Tables/VocabList/types");
 const VocabItemType = require("./Tables/VocabItem/types");
 const { ApolloServer, gql } = require("apollo-server");
 
+/*
+Para solo permitir que nuestro front end tenga acceso a los datos del api
+CORS afecta a cualquiera que quiera conectarse fuera del dominio del servidor,
+es decir cualquier app k no sea del lado del servidor como seria una SPA con react
+
+const corsOptions = { origin: "http://localhost:3000" };
+
+app.use(cors(corsOptions));
+*/
+
 const rootQuery = gql`
   scalar Date
 

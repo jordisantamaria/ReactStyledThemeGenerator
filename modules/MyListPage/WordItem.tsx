@@ -6,6 +6,7 @@ import ListItem from "../../components/UI/ListItem";
 import { Mutation } from "react-apollo";
 import { gql } from "apollo-boost";
 import { GET_LIST_ITEMS_BY_LISTNAME_QUERY } from "../../pages/myList";
+import { Colors } from "../../lib/Colors";
 
 interface IProps {
   className?: string;
@@ -44,14 +45,16 @@ class WordItem extends React.Component<IProps, IState> {
   public render() {
     return (
       <ListItem
-        p={"10px"}
+        p={18}
         variant={
-          !isPair(this.props.index) ? "outlinePrimary" : "outlineSecondary"
+          isPair(this.props.index) ? "outlinePrimary" : "outlineSecondary"
         }
         onClick={this.toogleOpen}
       >
-        <Flex width={1} alignItems={"center"}>
-          <Text>{this.props.item.word}</Text>
+        <Flex width={1} alignItems={"center"} color={Colors.black3}>
+          <Text fontSize={20} css={{ wordBreak: "keep-all" }}>
+            {this.props.item.word}
+          </Text>
           {this.state.isOpen && (
             <React.Fragment>
               <Flex width={1} ml={2} flexWrap={"wrap"}>
@@ -95,6 +98,7 @@ class WordItem extends React.Component<IProps, IState> {
                 {addVocabList => (
                   <Button
                     px={2}
+                    py={"5px"}
                     onClick={() => {
                       addVocabList({
                         variables: {
