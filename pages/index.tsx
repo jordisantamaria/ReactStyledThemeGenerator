@@ -1,6 +1,5 @@
 import * as React from "react";
 import Heading from "../components/UI/basic/Heading";
-import BaseLayout from "../components/BaseLayout";
 import ListGroup from "../modules/VocabListPage/components/ListGroup";
 import Container from "../components/UI/Container";
 import OpenModalButton from "../components/UI/modals/OpenModalButton";
@@ -51,7 +50,7 @@ class Index extends React.Component<IProps, any> {
   };
   public render() {
     return (
-      <BaseLayout description={"Home"} title={"Home"}>
+      <React.Fragment>
         <Box
           css={{
             background:
@@ -102,7 +101,7 @@ class Index extends React.Component<IProps, any> {
             </OpenModalButton>
           </Flex>
         </Container>
-      </BaseLayout>
+      </React.Fragment>
     );
   }
 }

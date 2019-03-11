@@ -4,7 +4,7 @@ import Box from "./basic/Box";
 import Link from "next/link";
 import Text from "./basic/Text";
 
-const Nav = () => {
+const Nav = ({ login, logout, isAuthenticated }) => {
   return (
     <Box bg={"primary"} color={"white"}>
       <Flex
@@ -17,7 +17,15 @@ const Nav = () => {
             <Text css={{ cursor: "pointer" }}>Aprende Japones</Text>
           </Link>
         </Box>
-        <Box p={3}>Inicia sesión</Box>
+        {isAuthenticated ? (
+          <Box p={3} onClick={logout}>
+            Cierra sesión
+          </Box>
+        ) : (
+          <Box p={3} onClick={login}>
+            Inicia sesión
+          </Box>
+        )}
       </Flex>
     </Box>
   );

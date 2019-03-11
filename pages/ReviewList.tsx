@@ -1,6 +1,5 @@
 import * as React from "react";
 import Heading from "../components/UI/basic/Heading";
-import BaseLayout from "../components/BaseLayout";
 import { withRouter } from "next/router";
 import { Mutation, Query } from "react-apollo";
 import { Box, Button, Flex, Text } from "../components/UI/basic";
@@ -42,7 +41,7 @@ class MyList extends React.Component<Iprops, IState> {
 
   public render() {
     return (
-      <BaseLayout title="My list" description="My personal list">
+      <React.Fragment>
         <Query
           query={GET_REVIEW_LIST_ITEMS_QUERY}
           variables={{ listName: this.props.router.query.listName }}
@@ -126,7 +125,7 @@ class MyList extends React.Component<Iprops, IState> {
             )}
           </Mutation>
         </Flex>
-      </BaseLayout>
+      </React.Fragment>
     );
   }
 }

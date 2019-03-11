@@ -1,6 +1,5 @@
 import * as React from "react";
 import Heading from "../components/UI/basic/Heading";
-import BaseLayout from "../components/BaseLayout";
 import { withRouter } from "next/router";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
@@ -37,7 +36,7 @@ class MyList extends React.Component<Iprops, IState> {
 
   public render() {
     return (
-      <BaseLayout title="My list" description="My personal list">
+      <React.Fragment>
         <Box
           css={{
             background:
@@ -83,7 +82,7 @@ class MyList extends React.Component<Iprops, IState> {
             }}
           </Query>
         </Container>
-      </BaseLayout>
+      </React.Fragment>
     );
   }
 }

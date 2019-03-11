@@ -5,6 +5,7 @@ import theme from "../lib/theme";
 import { ModalProvider } from "styled-react-modal";
 import withApolloClient from "../lib/apollo/with-apollo-client";
 import { ApolloProvider } from "react-apollo";
+import BaseLayout from "../components/BaseLayout";
 
 injectGlobal`
   * { box-sizing: border-box; margin: 0; }
@@ -81,6 +82,10 @@ class MyApp extends App {
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
             <ModalProvider>
+              <BaseLayout
+                title={"Learn japanese"}
+                description={"Learn japanese"}
+              />
               <Component {...pageProps} />
             </ModalProvider>
           </ThemeProvider>

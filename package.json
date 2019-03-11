@@ -25,6 +25,7 @@
     "apollo-boost": "^0.1.23",
     "apollo-server": "^2.4.6",
     "apollo-server-express": "^2.4.6",
+    "auth0-js": "^9.10.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",

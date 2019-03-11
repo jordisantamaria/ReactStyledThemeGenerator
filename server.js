@@ -5,6 +5,8 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+// const authService = new AuthService();
+
 app
   .prepare()
   .then(() => {
