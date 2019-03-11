@@ -19,7 +19,7 @@
     "start-prod": "SET NODE_ENV=production node server.js",
     "start:client": "nodemon server.js --exec babel-node",
     "start:server": "nodemon ./api/index.js --exec babel-node",
-    "start": "concurrently -r \"npm run start:server\" \"npm run start:client\"",
+    "start": "SET NODE_ENV=production node server.js",
     "postinstall": "npm run build"
   },
   "dependencies": {
