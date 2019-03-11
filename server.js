@@ -1,3 +1,16 @@
+import { merge } from "lodash";
+import { DateType } from "./api/ScalarTypes/Date";
+import { VocabItemResolver } from "./api/Tables/VocabItem/resolver";
+import { VocabListResolver } from "./api/Tables/VocabList/resolver";
+import { UserResolver } from "./api/Tables/User/resolver";
+import { UserType } from "./api/Tables/User/types";
+import { gql } from "apollo-server";
+import * as cors from "cors";
+import * as models from "./api/models";
+const { ApolloServer } = require("apollo-server-express");
+const VocabListType = require("./api/Tables/VocabList/types");
+const VocabItemType = require("./api/Tables/VocabItem/types");
+
 const express = require("express");
 const next = require("next");
 
@@ -5,26 +18,58 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-// const authService = new AuthService();
+const rootQuery = gql`
+  scalar Date
 
+  type Query {
+    _empty: String
+  }
+
+  type Mutation {
+    _empty: String
+  }
+`;
+
+const resolvers = merge(
+  DateType,
+  VocabItemResolver,
+  VocabListResolver,
+  UserResolver
+);
+
+const apolloServer = new ApolloServer({
+  typeDefs: [rootQuery, VocabListType, VocabItemType, UserType],
+  resolvers
+});
+
+let port = process.env.PORT;
+if (port == null || port === "") {
+  port = 3000;
+}
 app
   .prepare()
   .then(() => {
-    const server = express();
+    const app = express();
+    //app.use(cors)
 
-    server.get("/list/:listName", (req, res) => {
+    app.get("/list/:listName", (req, res) => {
       const actualPage = "/myList";
       const queryParams = { listName: req.params.listName };
       app.render(req, res, actualPage, queryParams);
     });
 
-    server.get("*", (req, res) => {
+    //TODO limitar * per a que no inclogui /api
+    app.get("*", (req, res) => {
       return handle(req, res);
     });
 
-    server.listen(3000, err => {
-      if (err) throw err;
-      console.log("> Ready on http://localhost:3000");
+    apolloServer.applyMiddleware({ app, path: "/api" });
+
+    models.sequelize.sync(/*{force: true}*/).then(function() {
+      app.listen(port, err => {
+        if (err) throw err;
+        console.log("> Ready on http://localhost:3000");
+      });
     });
   })
   .catch(ex => {

@@ -13,11 +13,14 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "precommit": "lint-staged",
-    "build": "next build",
-    "startBuild": "next start",
-    "start:client": "node server.js",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "next build",
+    "build:server": "babel ./api --out-dir .next/api",
+    "start-prod": "SET NODE_ENV=production node server.js",
+    "start:client": "nodemon server.js --exec babel-node",
     "start:server": "nodemon ./api/index.js --exec babel-node",
-    "start": "concurrently -r \"npm run start:server\" \"npm run start:client\""
+    "start": "concurrently -r \"npm run start:server\" \"npm run start:client\"",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@types/rebass": "^0.2.22",
@@ -42,6 +45,8 @@
     "lodash": "^4.17.11",
     "mysql2": "^1.6.4",
     "next": "^7.0.2",
+    "pg": "^7.8.2",
+    "pg-hstore": "^2.3.2",
     "prettier": "^1.15.3",
     "react": "^16.2.0",
     "react-apollo": "^2.3.3",
@@ -63,6 +68,7 @@
     "ts-node": "^8.0.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
