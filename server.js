@@ -15,8 +15,8 @@ const express = require("express");
 const next = require("next");
 
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const serverNext = next({ dev });
+const handle = serverNext.getRequestHandler();
 
 const rootQuery = gql`
   scalar Date
@@ -46,7 +46,7 @@ let port = process.env.PORT;
 if (port == null || port === "") {
   port = 3000;
 }
-app
+serverNext
   .prepare()
   .then(() => {
     const app = express();
@@ -55,22 +55,28 @@ app
     app.get("/list/:listName", (req, res) => {
       const actualPage = "/myList";
       const queryParams = { listName: req.params.listName };
-      app.render(req, res, actualPage, queryParams);
+      console.log("Get list ", queryParams);
+      serverNext.render(req, res, actualPage, queryParams);
     });
 
-    //TODO limitar * per a que no inclogui /api
-    app.get("*", (req, res) => {
+    //limitar * per a que no inclogui /api
+    app.get(/^(?!(?:\/api)$).*$/, (req, res) => {
       return handle(req, res);
     });
 
     apolloServer.applyMiddleware({ app, path: "/api" });
 
-    models.sequelize.sync(/*{force: true}*/).then(function() {
-      app.listen(port, err => {
-        if (err) throw err;
-        console.log("> Ready on http://localhost:3000");
+    models.sequelize
+      .sync(/*{force: true}*/)
+      .then(function() {
+        app.listen(port, err => {
+          if (err) throw err;
+          console.log("> Ready on http://localhost:3000");
+        });
+      })
+      .catch(e => {
+        console.log("Error al construir sequelize: ", e);
       });
-    });
   })
   .catch(ex => {
     console.error(ex.stack);

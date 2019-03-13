@@ -1,5 +1,6 @@
-import { UserType } from "./Tables/User/types";
+//Este fichero solo sirve para ejecutar el api de forma independiente.
 
+import { UserType } from "./Tables/User/types";
 const express = require("express");
 const bodyParser = require("body-parser");
 const { graphqlExpress, graphiqlExpress } = require("graphql-server-express");

@@ -6,6 +6,8 @@ import { ModalProvider } from "styled-react-modal";
 import withApolloClient from "../lib/apollo/with-apollo-client";
 import { ApolloProvider } from "react-apollo";
 import BaseLayout from "../components/BaseLayout";
+import { Provider } from "react-redux";
+import withReduxStore from "../lib/redux/with-redux-store";
 
 injectGlobal`
   * { box-sizing: border-box; margin: 0; }
@@ -79,20 +81,22 @@ class MyApp extends App {
     const { Component, pageProps, reduxStore, apolloClient } = this.props;
     return (
       <Container>
-        <ApolloProvider client={apolloClient}>
-          <ThemeProvider theme={theme}>
-            <ModalProvider>
-              <BaseLayout
-                title={"Learn japanese"}
-                description={"Learn japanese"}
-              />
-              <Component {...pageProps} />
-            </ModalProvider>
-          </ThemeProvider>
-        </ApolloProvider>
+        <Provider store={reduxStore}>
+          <ApolloProvider client={apolloClient}>
+            <ThemeProvider theme={theme}>
+              <ModalProvider>
+                <BaseLayout
+                  title={"Learn japanese"}
+                  description={"Learn japanese"}
+                />
+                <Component {...pageProps} />
+              </ModalProvider>
+            </ThemeProvider>
+          </ApolloProvider>
+        </Provider>
       </Container>
     );
   }
 }
 
-export default withApolloClient(MyApp);
+export default withReduxStore(withApolloClient(MyApp));

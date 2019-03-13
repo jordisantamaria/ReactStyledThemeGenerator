@@ -1,8 +1,11 @@
 import * as React from "react";
 import AuthService from "../lib/Auth/AuthService";
+import { connect } from "react-redux";
+import { loginUser } from "../lib/redux/UserActions";
 
 interface IProps {
   className?: string;
+  loginUser: (user) => void;
 }
 
 class Callback extends React.Component<IProps, any> {
@@ -10,7 +13,10 @@ class Callback extends React.Component<IProps, any> {
 
   public componentDidMount(): void {
     this.authService = new AuthService();
-    this.authService.handleAuthentication();
+    this.authService.handleAuthentication().then(user => {
+      console.log("after authentication = ", user);
+      this.props.loginUser(user);
+    });
   }
 
   public render() {
@@ -22,4 +28,12 @@ class Callback extends React.Component<IProps, any> {
   }
 }
 
-export default Callback;
+const mapDispatchToProps = dispatch => {
+  return {
+    loginUser: user => dispatch(loginUser(user))
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(Callback);
