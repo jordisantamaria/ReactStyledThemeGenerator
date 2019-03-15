@@ -5,6 +5,7 @@ import Link from "next/link";
 import Text from "./basic/Text";
 
 const Nav = ({ login, logout, isAuthenticated }) => {
+  console.log("Nav is authenticated = ", isAuthenticated);
   return (
     <Box bg={"primary"} color={"white"}>
       <Flex
@@ -17,7 +18,7 @@ const Nav = ({ login, logout, isAuthenticated }) => {
             <Text css={{ cursor: "pointer" }}>Aprende Japones</Text>
           </Link>
         </Box>
-        {isAuthenticated ? (
+        {isAuthenticated === true ? (
           <Box p={3} onClick={logout}>
             Cierra sesión
           </Box>

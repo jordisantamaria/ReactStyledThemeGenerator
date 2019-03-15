@@ -7,9 +7,12 @@ import { UserType } from "./api/Tables/User/types";
 import { gql } from "apollo-server";
 import * as cors from "cors";
 import * as models from "./api/models";
+import { getUser } from "./api/Tables/User/UserService";
 const { ApolloServer } = require("apollo-server-express");
 const VocabListType = require("./api/Tables/VocabList/types");
 const VocabItemType = require("./api/Tables/VocabItem/types");
+const jwksClient = require("jwks-rsa");
+const jwt = require("jsonwebtoken");
 
 const express = require("express");
 const next = require("next");
@@ -37,9 +40,51 @@ const resolvers = merge(
   UserResolver
 );
 
+const client = jwksClient({
+  jwksUri: "https://learn-japanese.eu.auth0.com/.well-known/jwks.json"
+});
+
+function getKey(header, cb) {
+  client.getSigningKey(header.kid, function(err, key) {
+    var signingKey = key.publicKey || key.rsaPublicKey;
+    cb(null, signingKey);
+  });
+}
+
+//TODO Mirar de conseguir que funcioni amb el audience tambe
+const options = {
+  issuer: "https://learn-japanese.eu.auth0.com/",
+  algorithms: ["RS256"]
+};
+
 const apolloServer = new ApolloServer({
   typeDefs: [rootQuery, VocabListType, VocabItemType, UserType],
-  resolvers
+  resolvers,
+  context: async ({ req }) => {
+    let authToken = null;
+    let user = null;
+    try {
+      authToken = req.headers["authorization"];
+      console.log("context auth token = ", authToken);
+
+      user = new Promise((resolve, reject) => {
+        jwt.verify(authToken, getKey, options, (err, decoded) => {
+          console.log("decoded = ", decoded);
+          if (err) {
+            console.log("Error verifying token ", err);
+            return reject(err);
+          }
+          resolve(decoded.email);
+        });
+      });
+    } catch (e) {
+      console.warn(`Unable to authenticate using auth token: ${authToken}`);
+    }
+
+    return {
+      user
+    };
+  }
 });
 
 let port = process.env.PORT;

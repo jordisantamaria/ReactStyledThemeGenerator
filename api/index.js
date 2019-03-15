@@ -46,11 +46,36 @@ const resolvers = merge(
 
 const server = new ApolloServer({
   typeDefs: [rootQuery, VocabListType, VocabItemType, UserType],
-  resolvers
+  resolvers,
+  context: async ({ req }) => {
+    let authToken = null;
+    let currentUser = null;
+    console.log("context");
+    try {
+      authToken = req.headers["authorization"];
+
+      if (authToken) {
+        currentUser = { user: "userTest" };
+      }
+    } catch (e) {
+      console.warn(`Unable to authenticate using auth token: ${authToken}`);
+    }
+
+    return {
+      authToken,
+      currentUser
+    };
+  }
 });
 
-models.sequelize.sync(/*{force: true}*/).then(function() {
-  server.listen().then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`);
-  });
-});
+models.sequelize
+  .sync(/*{force: true}*/)
+  .then(function() {
+    server
+      .listen()
+      .then(({ url }) => {
+        console.log(`🚀 Server ready at ${url}`);
+      })
+      .catch(e => console.log("Apollo error = ", e));
+  })
+  .catch(e => console.log("Sequelize error = ", e));

@@ -86,7 +86,8 @@ class Index extends React.Component<IProps, any> {
           <Query query={GET_LIST_NAMES_QUERY}>
             {({ loading, error, data }) => {
               if (loading) return <p>Loading...</p>;
-              if (error) return <p>Error :(</p>;
+              if (error)
+                return <ListGroup listName={"Vocabulario"} lists={null} />;
               return (
                 <ListGroup listName={"Vocabulario"} lists={data.vocabLists} />
               );

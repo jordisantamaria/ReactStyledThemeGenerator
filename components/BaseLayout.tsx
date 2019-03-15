@@ -1,53 +1,66 @@
 import * as React from "react";
 import Head, { IHeadProps } from "./Head";
 import Nav from "./UI/Nav";
-import AuthService, { isAuthenticated } from "../lib/Auth/AuthService";
+import auth, { isAuthenticated } from "../lib/Auth/AuthService";
 import { connect } from "react-redux";
 import { loginUser, updateUserExpiresAt } from "../lib/redux/UserActions";
 import { IState } from "../lib/redux/rootReducer";
 import { IUser } from "../lib/redux/UserReducer";
+import { withRouter } from "next/router";
 
 interface ILayoutProps extends IHeadProps {
   children?: any;
   user: IUser;
-  isAuthenticated: boolean;
   loginUser: (user: IUser) => void;
   updateUserExpiresAt: (expiresAt: string) => void;
+  router: any;
+  expiresAt: string;
 }
 
 class BaseLayout extends React.Component<ILayoutProps> {
-  public authService = null;
-
   constructor(props) {
     super(props);
+    this.state = {
+      isAuthenticated: false
+    };
   }
-  public componentDidMount(): void {
-    console.log("Component Did mount");
-    this.authService = new AuthService();
-    this.authService.updateExpiresAt(expiresAt => {
-      //TODO update expires at a redux
-      console.log("updateExpiresAt = ", expiresAt);
-      this.props.updateUserExpiresAt(expiresAt);
-    });
+  public async componentDidMount() {
     //obtenir access token e id
     //obtenir profile
 
-    // ==> obtenir user
-    if (!this.props.isAuthenticated) {
-      const user = this.authService.getUser();
-      if (user !== null) {
-        this.props.loginUser(user);
+    auth.updateExpiresAt(expiresAt => {
+      console.log("updateExpiresAt = ", expiresAt);
+      if (expiresAt !== this.props.expiresAt) {
+        this.props.updateUserExpiresAt(expiresAt);
       }
-    }
+    });
+    await auth.init();
+    this.checkAuthRoutes();
+    this.initUser();
   }
 
+  private checkAuthRoutes = () => {
+    if (!auth.isAuthenticated() && this.props.router.pathname === "/myList") {
+      console.log("Path No Autorizada");
+      auth.login();
+    } else {
+      console.log("Path autorizada");
+    }
+  };
+  private initUser = () => {
+    const user = auth.getUser();
+    if (user !== null) {
+      this.props.loginUser(user);
+      console.log("router baselayout = ", this.props.router);
+    }
+  };
+
   public login = () => {
-    this.authService.login();
-    console.log("login");
+    auth.login();
   };
 
   public logout = () => {
-    this.authService.logout();
+    auth.logout();
     console.log("logout");
   };
 
@@ -58,7 +71,7 @@ class BaseLayout extends React.Component<ILayoutProps> {
         <Nav
           login={this.login}
           logout={this.logout}
-          isAuthenticated={this.props.isAuthenticated}
+          isAuthenticated={isAuthenticated(this.props.expiresAt)}
         />
         {this.props.children}
       </React.Fragment>
@@ -77,11 +90,11 @@ const mapStateToProps = (state: IState, ownProps) => {
   return {
     ...ownProps,
     user: state.user,
-    isAuthenticated: isAuthenticated(state.user.expiresAt)
+    expiresAt: state.user.expiresAt
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BaseLayout);
+)(withRouter(BaseLayout));

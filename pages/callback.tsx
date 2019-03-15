@@ -1,7 +1,8 @@
 import * as React from "react";
-import AuthService from "../lib/Auth/AuthService";
 import { connect } from "react-redux";
 import { loginUser } from "../lib/redux/UserActions";
+import auth from "../lib/Auth/AuthService";
+import Router from "next/router";
 
 interface IProps {
   className?: string;
@@ -9,14 +10,11 @@ interface IProps {
 }
 
 class Callback extends React.Component<IProps, any> {
-  private authService = null;
-
-  public componentDidMount(): void {
-    this.authService = new AuthService();
-    this.authService.handleAuthentication().then(user => {
-      console.log("after authentication = ", user);
-      this.props.loginUser(user);
-    });
+  public async componentDidMount() {
+    await auth.handleAuthentication();
+    //funciona, fallo de types
+    //TODO que redireccione a la Url de donde proviene, guardando url by localstorage
+    Router.push("/");
   }
 
   public render() {
