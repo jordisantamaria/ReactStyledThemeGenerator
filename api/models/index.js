@@ -11,9 +11,8 @@ let env = process.env.NODE_ENV || "development";
 let db = {};
 let sequelize;
 
-console.log("configEnv = ", config);
 if (config.use_env_variable) {
-  sequelize = new Sequelize(configEnv.use_env_variable);
+  sequelize = new Sequelize(config.use_env_variable);
 } else {
   sequelize = new Sequelize(
     config.database,
