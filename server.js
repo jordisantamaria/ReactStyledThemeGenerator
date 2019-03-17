@@ -59,9 +59,12 @@ const options = {
   algorithms: ["RS256"]
 };
 
+//introspection:  true y playground: true permite k graphiql se vea en produccion
 const apolloServer = new ApolloServer({
   typeDefs: [rootQuery, VocabListType, VocabItemType, UserType],
   resolvers,
+  introspection: true,
+  playground: true,
   context: async ({ req }) => {
     let authToken = null;
     let user = null;
