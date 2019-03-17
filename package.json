@@ -18,7 +18,7 @@
     "build:server": "babel ./api --out-dir .next/api",
     "build:serverjsFile": "babel server.js --out-dir .next/",
     "start-prod": "NODE_ENV=production node initProd.js",
-    "start": "nodemon server.js --exec babel-node",
+    "start": "SET NODE_ENV=development && nodemon server.js --exec babel-node",
     "start:server": "nodemon ./api/index.js --exec babel-node",
     "postinstall": "npm run build"
   },
