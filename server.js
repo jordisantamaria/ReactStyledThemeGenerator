@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { merge } from "lodash";
 import { DateType } from "./api/ScalarTypes/Date";
 import { VocabItemResolver } from "./api/Tables/VocabItem/resolver";

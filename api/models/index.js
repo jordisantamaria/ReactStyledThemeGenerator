@@ -1,20 +1,27 @@
 "use strict";
 //Add all models and sequelize on a single object
 
+let config = require(__dirname + "/../config/config.js");
+
 let fs = require("fs");
 let path = require("path");
 let Sequelize = require("sequelize");
 let basename = path.basename(__filename);
 let env = process.env.NODE_ENV || "development";
-let config = require(__dirname + "/../config/config.js");
 let db = {};
+let sequelize;
 
-let sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
-  config
-);
+console.log("configEnv = ", config);
+if (config.use_env_variable) {
+  sequelize = new Sequelize(configEnv.use_env_variable);
+} else {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
+}
 
 fs.readdirSync(__dirname)
   .filter(file => {
