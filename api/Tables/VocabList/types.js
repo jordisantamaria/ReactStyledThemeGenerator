@@ -16,6 +16,7 @@ module.exports = gql`
     vocabLists: [VocabList]
     vocabList(id: Int): VocabList
     vocabListByListName(listName: String): VocabList
+    vocabListsNoToken: [VocabList]
   }
 
   extend type Mutation {

@@ -16,12 +16,10 @@ export const VocabListResolver = {
         throw new AuthenticationError("You must be logged in to do this");
       }
     },
-    vocabListsNoToken: async (rootValue, args) => {
-      try {
-        return VocabList.findAll({}).then(function(vocabLists) {
-          return vocabLists;
-        });
-      } catch (e) {}
+    vocabListsNoToken: (rootValue, args) => {
+      return VocabList.findAll({}).then(function(vocabLists) {
+        return vocabLists;
+      });
     },
     vocabList: async (rootValue, args, context) => {
       try {
