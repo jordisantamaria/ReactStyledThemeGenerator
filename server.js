@@ -1,4 +1,5 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname + "/.env") });
 import { merge } from "lodash";
 import { DateType } from "./api/ScalarTypes/Date";
 import { VocabItemResolver } from "./api/Tables/VocabItem/resolver";
