@@ -20,6 +20,7 @@ module.exports = gql`
 
   extend type Query {
     vocabItem(id: Int): VocabItem
+    vocabItems: [VocabItem]
     vocabItemsReview: VocabList
   }
 
