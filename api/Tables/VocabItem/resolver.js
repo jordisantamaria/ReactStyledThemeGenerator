@@ -15,8 +15,11 @@ const resetReviewDate = () => {
 export const VocabItemResolver = {
   Query: {
     //Todo: devolver el item de la bd
-    vocabItem: id => {
+    vocabItem: (rootValue, args) => {
       return VocabList.findById(args.id);
+    },
+    vocabItems: (rootValue, args) => {
+      return VocabList.findAll();
     },
     vocabItemsReview: (rootValue, args) =>
       VocabItem.findAll({
