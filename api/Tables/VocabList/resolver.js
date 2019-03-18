@@ -17,7 +17,13 @@ export const VocabListResolver = {
       }
     },
     vocabListsNoToken: (rootValue, args) => {
-      return VocabList.findAll({}).then(function(vocabLists) {
+      return VocabList.findAll({
+        include: [
+          {
+            model: VocabItem
+          }
+        ]
+      }).then(function(vocabLists) {
         return vocabLists;
       });
     },

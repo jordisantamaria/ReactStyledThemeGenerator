@@ -16,11 +16,7 @@ export const VocabItemResolver = {
   Query: {
     //Todo: devolver el item de la bd
     vocabItem: id => {
-      return {
-        id,
-        word: "Hello",
-        translation: "Hola"
-      };
+      return VocabList.findById(args.id);
     },
     vocabItemsReview: (rootValue, args) =>
       VocabItem.findAll({
