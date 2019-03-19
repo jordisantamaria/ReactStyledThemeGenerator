@@ -47,8 +47,7 @@ export const VocabItemResolver = {
   Mutation: {
     vocabItemLearned: (_, args) => {
       const date = dayjs();
-      const toReviewDate = date /*.add(1, "day")*/
-        .format("MM-DD-YYYY");
+      const toReviewDate = date.add(1, "day").format("MM-DD-YYYY");
       return VocabItem.findById(args.id).then(item =>
         item.update({ toReviewDate, toReviewDelay: 2 })
       );
