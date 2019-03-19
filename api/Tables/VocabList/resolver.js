@@ -73,23 +73,23 @@ export const VocabListResolver = {
       try {
         const user = await context.user;
         console.log("user = ", user);
-        return VocabList.create({
+        const vocabList1 = await VocabList.create({
           listName: args.vocabList.listName,
           user
-        }).then(function(vocabList1) {
-          if (args.vocabList.VocabItems) {
-            //el validator no treu els items empty, aixi que ho fem manualment
-            const vocabNoEmpty = args.vocabList.VocabItems.filter(
-              item => item.word.length > 0 && item.translation.length > 0
-            );
-
-            // creamos los items y los linkamos a la lista
-            VocabItem.bulkCreate(vocabNoEmpty).then(function(vocabItems) {
-              vocabList1.addVocabItems(vocabItems);
-            });
-          }
-          return vocabList1;
         });
+        if (args.vocabList.VocabItems) {
+          //el validator no treu els items empty, aixi que ho fem manualment
+          const vocabNoEmpty = args.vocabList.VocabItems.filter(
+            item => item.word.length > 0 && item.translation.length > 0
+          );
+
+          // creamos los items y los linkamos a la lista
+          const vocabItems = await VocabItem.bulkCreate(vocabNoEmpty, {
+            returning: true
+          });
+          vocabList1.addVocabItems(vocabItems);
+        }
+        return vocabList1;
       } catch (e) {
         throw new AuthenticationError("You must be logged in to do this");
       }
