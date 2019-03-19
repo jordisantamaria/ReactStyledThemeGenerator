@@ -16,10 +16,10 @@ export const VocabItemResolver = {
   Query: {
     //Todo: devolver el item de la bd
     vocabItem: (rootValue, args) => {
-      return VocabList.findById(args.id);
+      return VocabItem.findById(args.id);
     },
     vocabItems: (rootValue, args) => {
-      return VocabList.findAll();
+      return VocabItem.findAll();
     },
     vocabItemsReview: (rootValue, args) =>
       VocabItem.findAll({

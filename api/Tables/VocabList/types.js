@@ -4,6 +4,7 @@ module.exports = gql`
   type VocabList {
     id: ID!
     listName: String!
+    user: String!
     VocabItems: [VocabItem]
   }
 

@@ -12,6 +12,7 @@ let db = {};
 let sequelize;
 
 if (config.use_env_variable) {
+  console.log("created bd postgress de heroku");
   sequelize = new Sequelize(config.use_env_variable);
 } else {
   sequelize = new Sequelize(
