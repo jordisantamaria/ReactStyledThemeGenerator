@@ -117,7 +117,7 @@ serverNext
     apolloServer.applyMiddleware({ app, path: "/api" });
 
     models.sequelize
-      .sync({ force: true })
+      .sync(/*{ force: true }*/)
       .then(function() {
         app.listen(port, err => {
           if (err) throw err;
