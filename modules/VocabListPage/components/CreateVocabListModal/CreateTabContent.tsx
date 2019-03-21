@@ -111,15 +111,6 @@ const CreateTabContent = (props: Iprops) => {
               </form>
             )}
           </Form>
-          <div
-            onClick={() => {
-              addVocabList({
-                variables: { vocabList: { listName: "Lista on click" } }
-              });
-            }}
-          >
-            Click me
-          </div>
         </React.Fragment>
       )}
     </Mutation>
