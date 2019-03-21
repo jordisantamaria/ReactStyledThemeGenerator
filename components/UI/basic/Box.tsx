@@ -1,7 +1,7 @@
 import sys from "system-components";
 
 export interface IBox {
-  fontSize?: number | number[];
+  fontSize?: string | number | number[];
   css?: Object;
   m?: number | string;
   mt?: number | string;
@@ -31,11 +31,30 @@ export interface IBox {
   position?: string;
   is?: string;
   onClick?: () => void;
+  backgroundImage?: string;
 }
 
 const css = props => props.css;
 
 const BoxStyled = sys("space", "color", "fontSize", "width", "position", css);
 
-const Box = (props: IBox) => <BoxStyled {...props} />;
+const Box = (props: IBox) => {
+  if (props.backgroundImage) {
+    const { backgroundImage, ...otherProps } = props;
+    return (
+      <BoxStyled
+        {...otherProps}
+        css={{
+          backgroundImage: `url(static/${backgroundImage})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          height: "calc(100vh - 54px)",
+          backgroundPosition: "center"
+        }}
+      />
+    );
+  }
+  return <BoxStyled {...props} />;
+};
+
 export default Box;

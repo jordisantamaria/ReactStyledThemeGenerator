@@ -2,17 +2,10 @@ const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname + "/.env") });
 import { merge } from "lodash";
 import { DateType } from "./api/ScalarTypes/Date";
-import { VocabItemResolver } from "./api/Tables/VocabItem/resolver";
-import { VocabListResolver } from "./api/Tables/VocabList/resolver";
-import { UserResolver } from "./api/Tables/User/resolver";
-import { UserType } from "./api/Tables/User/types";
 import { gql } from "apollo-server";
-import * as cors from "cors";
 import * as models from "./api/models";
-import { getUser } from "./api/Tables/User/UserService";
+
 const { ApolloServer } = require("apollo-server-express");
-const VocabListType = require("./api/Tables/VocabList/types");
-const VocabItemType = require("./api/Tables/VocabItem/types");
 const jwksClient = require("jwks-rsa");
 const jwt = require("jsonwebtoken");
 
@@ -35,12 +28,7 @@ const rootQuery = gql`
   }
 `;
 
-const resolvers = merge(
-  DateType,
-  VocabItemResolver,
-  VocabListResolver,
-  UserResolver
-);
+const resolvers = merge(DateType);
 
 const client = jwksClient({
   jwksUri: "https://learn-japanese.eu.auth0.com/.well-known/jwks.json"
@@ -61,7 +49,7 @@ const options = {
 
 //introspection:  true y playground: true permite k graphiql se vea en produccion
 const apolloServer = new ApolloServer({
-  typeDefs: [rootQuery, VocabListType, VocabItemType, UserType],
+  typeDefs: [rootQuery],
   resolvers,
   introspection: true,
   playground: true,
@@ -100,14 +88,6 @@ serverNext
   .prepare()
   .then(() => {
     const app = express();
-    //app.use(cors)
-
-    app.get("/list/:listName", (req, res) => {
-      const actualPage = "/myList";
-      const queryParams = { listName: req.params.listName };
-      console.log("Get list ", queryParams);
-      serverNext.render(req, res, actualPage, queryParams);
-    });
 
     //limitar * per a que no inclogui /api
     app.get(/^(?!(?:\/api)$).*$/, (req, res) => {

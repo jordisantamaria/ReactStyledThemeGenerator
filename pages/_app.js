@@ -86,8 +86,8 @@ class MyApp extends App {
             <ThemeProvider theme={theme}>
               <ModalProvider>
                 <BaseLayout
-                  title={"Learn japanese"}
-                  description={"Learn japanese"}
+                  title={"Proyecto base"}
+                  description={"Proyecto base"}
                 />
                 <Component {...pageProps} />
               </ModalProvider>
