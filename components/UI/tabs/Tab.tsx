@@ -14,6 +14,7 @@ const Tab = (props: IProps) => {
       color={props.isActiveTab ? "black" : "black2"}
       p={1}
       css={{ textAlign: "center" }}
+      {...props}
     >
       {props.children}
     </Box>

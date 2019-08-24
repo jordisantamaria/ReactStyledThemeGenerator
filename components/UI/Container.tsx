@@ -6,7 +6,14 @@ interface Iprops {
 }
 const Container = (props: Iprops) => {
   return (
-    <Box p={3} m={"auto"} css={{ maxWidth: "1000px" }}>
+    <Box
+      mt={3}
+      p={3}
+      m={"auto"}
+      css={{ maxWidth: "1000px" }}
+      bg={"white"}
+      borderRadius={"8px"}
+    >
       {props.children}
     </Box>
   );

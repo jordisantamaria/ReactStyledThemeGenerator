@@ -6,7 +6,8 @@ interface Iprops {
   children: any;
 }
 const TabPanel = (props: Iprops) => {
-  return props.isActiveTab ? <Flex>{props.children}</Flex> : null;
+  const { isActiveTab, children, ...otherProps } = props;
+  return isActiveTab ? <Flex {...otherProps}>{children}</Flex> : null;
 };
 
 export default TabPanel;

@@ -1,22 +1,31 @@
-import sys from "system-components";
+import styled from "styled-components";
+import {
+  borders,
+  color,
+  fontSize,
+  position,
+  space,
+  width,
+  colorStyle
+} from "styled-system";
 
 export interface IBox {
   fontSize?: string | number | number[];
-  css?: Object;
-  m?: number | string;
-  mt?: number | string;
-  mr?: number | string;
-  mb?: number | string;
-  ml?: number | string;
-  mx?: number | string;
-  my?: number | string;
-  p?: number | string;
-  pt?: number | string;
-  pr?: number | string;
-  pb?: number | string;
-  pl?: number | string;
-  px?: number | string;
-  py?: number | string;
+  css?: Object; //TODO s'esta repetint les propietats definides aixi 2 vegades
+  m?: number | string | any[];
+  mt?: number | string | any[];
+  mr?: number | string | any[];
+  mb?: number | string | any[];
+  ml?: number | string | any[];
+  mx?: number | string | any[];
+  my?: number | string | any[];
+  p?: number | string | any[];
+  pt?: number | string | any[];
+  pr?: number | string | any[];
+  pb?: number | string | any[];
+  pl?: number | string | any[];
+  px?: number | string | any[];
+  py?: number | string | any[];
   width?: number | string | any[];
   color?: string;
   bg?: string;
@@ -27,33 +36,42 @@ export interface IBox {
   borderBottom?: string;
   borderLeft?: string;
   borderColor?: string;
-  borderRadius?: string;
+  borderRadius?: string | number;
   position?: string;
-  is?: string;
+  as?: string;
   onClick?: () => void;
   backgroundImage?: string;
+  height?: string;
+  colors?: string;
+  key?: any;
+  ref?: any;
 }
 
 const css = props => props.css;
 
-const BoxStyled = sys("space", "color", "fontSize", "width", "position", css);
+/*const BoxStyled = styled(({ fontSize, color, bg, width, ...other }) => <div {...other} />)`
+  ${space}
+  ${width}
+  ${fontSize}
+  ${color}
+  ${position}
+  ${borders}
+  ${colorStyle}
+  ${css}
+`;*/
+
+const BoxStyled = styled.div`
+  ${space}
+  ${width}
+  ${fontSize}
+  ${color}
+  ${position}
+  ${borders}
+  ${colorStyle}
+  ${css}
+`;
 
 const Box = (props: IBox) => {
-  if (props.backgroundImage) {
-    const { backgroundImage, ...otherProps } = props;
-    return (
-      <BoxStyled
-        {...otherProps}
-        css={{
-          backgroundImage: `url(static/${backgroundImage})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          height: "calc(100vh - 54px)",
-          backgroundPosition: "center"
-        }}
-      />
-    );
-  }
   return <BoxStyled {...props} />;
 };
 

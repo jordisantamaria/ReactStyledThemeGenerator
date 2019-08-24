@@ -25,9 +25,6 @@ class OpenModalButton extends React.Component<Iprops, IState> {
   public render() {
     return (
       <React.Fragment>
-        {/*<Button width={4/5} color={Colors.primaryDark} onClick={this.toggleModal}>
-        {this.props.children}
-      </Button>*/}
         {React.cloneElement(this.props.children, {
           onClick: this.toggleModal
         })}
