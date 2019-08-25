@@ -26,10 +26,26 @@ export default {
       color: Colors.white,
       backgroundColor: Colors.secondary
     },
+    primaryRounded: {
+      color: Colors.white,
+      backgroundColor: Colors.secondary,
+      borderRadius: "10em"
+    },
     outline: {
       color: Colors.primaryDark,
       backgroundColor: Colors.white,
       border: `2px solid ${Colors.primaryDark}`,
+
+      ":hover:enabled": {
+        backgroundColor: Colors.primaryDark,
+        color: Colors.white
+      }
+    },
+    outlineRounded: {
+      color: Colors.primaryDark,
+      backgroundColor: Colors.white,
+      border: `2px solid ${Colors.primaryDark}`,
+      borderRadius: "10em",
 
       ":hover:enabled": {
         backgroundColor: Colors.primaryDark,
@@ -52,6 +68,34 @@ export default {
       color: Colors.white,
       ":active": {
         backgroundColor: Colors.dangerActive
+      }
+    },
+    warning: {
+      backgroundColor: Colors.warning,
+      color: Colors.white,
+      ":active": {
+        backgroundColor: Colors.warningActive
+      }
+    },
+    info: {
+      backgroundColor: Colors.info,
+      color: Colors.white,
+      ":active": {
+        backgroundColor: Colors.infoActive
+      }
+    },
+    light: {
+      backgroundColor: Colors.light,
+      color: Colors.white,
+      ":active": {
+        backgroundColor: Colors.lightActive
+      }
+    },
+    dark: {
+      backgroundColor: Colors.dark,
+      color: Colors.white,
+      ":active": {
+        backgroundColor: Colors.darkActive
       }
     }
   }

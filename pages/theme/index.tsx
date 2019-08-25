@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Heading } from "../../components/UI/basic";
+import { Box, Button, Heading } from "../../components/UI/basic";
 import { connect } from "react-redux";
 import { ITheme, setSpace } from "../../lib/redux/ThemeActions";
 import { RouterProps, withRouter } from "next/router";

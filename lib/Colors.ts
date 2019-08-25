@@ -17,7 +17,15 @@ export const Colors = {
   successBorderHover: "#1e7e34",
   successBorderActive: "#1e7e34",
   danger: "#ff3547",
-  dangerActive: "#ce0012"
+  dangerActive: "#ce0012",
+  warning: "#fb3",
+  warningActive: "#c80",
+  info: "#33b5e5",
+  infoActive: "#14799e",
+  light: "#e0e0e0",
+  lightActive: "#adadad",
+  dark: "#212121",
+  darkActive: "#000"
 };
 
 //verde
