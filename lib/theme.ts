@@ -1,17 +1,26 @@
 import { Colors } from "./Colors";
+import { Breakpoints } from "./Breakpoints";
 export default {
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
+  fontSizes: [12, 14, 16, 20, 22, 24],
   colors: { ...Colors },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   fonts: {
     sans: "system-ui, sans-serif",
     mono: "Menlo, monospace"
   },
-  shadows: {
-    small: "0 0 4px rgba(0, 0, 0, .125)",
-    large: "0 0 24px rgba(0, 0, 0, .125)"
+  breakpoints: [Breakpoints.small, Breakpoints.medium, Breakpoints.large],
+  textStyles: {
+    caps: {
+      textTransform: "uppercase",
+      letterSpacing: "0.15em"
+    },
+    link: {
+      color: Colors.link
+    },
+    error: {
+      color: Colors.danger
+    }
   },
-  breakpoints: [0, 560, 780, 1200],
   buttons: {
     primary: {
       color: Colors.white,
@@ -20,29 +29,30 @@ export default {
     outline: {
       color: Colors.primaryDark,
       backgroundColor: Colors.white,
-      boxShadow: "inset 0 0 0 2px",
-      ":hover": {
+      border: `2px solid ${Colors.primaryDark}`,
+
+      ":hover:enabled": {
         backgroundColor: Colors.primaryDark,
-        color: Colors.white,
-        boxShadow: "none"
+        color: Colors.white
       }
-    }
-  },
-  cards: {
-    primaryLight: {
-      backgroundColor: Colors.primaryLight
     },
-    primary: {
-      backgroundColor: Colors.primary
+    success: {
+      color: Colors.white,
+      backgroundColor: Colors.success,
+      ":hover:enabled": {
+        borderColor: Colors.successBorderHover
+      },
+      ":active": {
+        borderColor: Colors.successBorderActive,
+        backgroundColor: Colors.successActive
+      }
     },
-    secondary: {
-      backgroundColor: Colors.secondary
-    },
-    outlinePrimary: {
-      boxShadow: `inset 0px 0px 23px -5px ${Colors.primary}`
-    },
-    outlineSecondary: {
-      boxShadow: `inset 0px 0px 23px -5px ${Colors.secondary}`
+    danger: {
+      backgroundColor: Colors.danger,
+      color: Colors.white,
+      ":active": {
+        backgroundColor: Colors.dangerActive
+      }
     }
   }
 };

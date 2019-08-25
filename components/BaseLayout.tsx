@@ -7,6 +7,8 @@ import { loginUser, updateUserExpiresAt } from "../lib/redux/UserActions";
 import { IState } from "../lib/redux/rootReducer";
 import { IUser } from "../lib/redux/UserReducer";
 import { withRouter } from "next/router";
+import { ThemeProvider } from "styled-components";
+import { ITheme } from "../lib/redux/ThemeActions";
 
 interface ILayoutProps extends IHeadProps {
   children?: any;
@@ -15,6 +17,7 @@ interface ILayoutProps extends IHeadProps {
   updateUserExpiresAt: (expiresAt: string) => void;
   router: any;
   expiresAt: string;
+  theme: ITheme;
 }
 
 class BaseLayout extends React.Component<ILayoutProps> {
@@ -66,15 +69,17 @@ class BaseLayout extends React.Component<ILayoutProps> {
 
   public render() {
     return (
-      <React.Fragment>
-        <Head title={this.props.title} description={this.props.description} />
-        <Nav
-          login={this.login}
-          logout={this.logout}
-          isAuthenticated={isAuthenticated(this.props.expiresAt)}
-        />
-        {this.props.children}
-      </React.Fragment>
+      <ThemeProvider theme={this.props.theme}>
+        <React.Fragment>
+          <Head title={this.props.title} description={this.props.description} />
+          <Nav
+            login={this.login}
+            logout={this.logout}
+            isAuthenticated={isAuthenticated(this.props.expiresAt)}
+          />
+          {this.props.children}
+        </React.Fragment>
+      </ThemeProvider>
     );
   }
 }
@@ -90,7 +95,8 @@ const mapStateToProps = (state: IState, ownProps) => {
   return {
     ...ownProps,
     user: state.user,
-    expiresAt: state.user.expiresAt
+    expiresAt: state.user.expiresAt,
+    theme: state.theme
   };
 };
 

@@ -29,11 +29,8 @@ export interface IPanel extends IFlex {
 
 const css = props => props.css;
 
-const CardStyled = styled.div(
-  {
-    display: "flex",
-    overflow: "hidden"
-  },
+const PanelStyled = styled.div(
+  {},
   space,
   color,
   position,
@@ -54,7 +51,7 @@ const CardStyled = styled.div(
 );
 
 const Panel: React.FC<IPanel> = (props: IPanel) => {
-  return <CardStyled {...props} />;
+  return <PanelStyled {...props} />;
 };
 
 Panel.defaultProps = {

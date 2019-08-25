@@ -2,14 +2,14 @@ import * as React from "react";
 import Flex from "./basic/Flex";
 import Sticky from "./advanced/Sticky";
 import NavbarLink from "./NavbarLink";
+import { Colors } from "../../lib/Colors";
 
 const Nav = ({ login, logout, isAuthenticated }) => {
-  console.log("Nav is authenticated = ", isAuthenticated);
   return (
-    <Sticky bg={"primary"} color={"white"}>
+    <Sticky bg={Colors.primary} color={"white"}>
       <Flex m={"auto"} justifyContent={"space-between"}>
         <NavbarLink p={3} href={"/"}>
-          Aprende Japones
+          Styled Theme
         </NavbarLink>
 
         <Flex>
@@ -17,7 +17,7 @@ const Nav = ({ login, logout, isAuthenticated }) => {
             Administracion
           </NavbarLink>
           <NavbarLink p={3} href={"/StudyVocabulary"}>
-            Repasar vocabulario
+            Descargar Tema
           </NavbarLink>
           {isAuthenticated === true ? (
             <NavbarLink p={3} onClick={logout}>

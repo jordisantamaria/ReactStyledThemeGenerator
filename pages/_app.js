@@ -1,7 +1,6 @@
 import App, { Container } from "next/app";
 import React from "react";
-import { injectGlobal, ThemeProvider } from "styled-components";
-import theme from "../lib/theme";
+import { injectGlobal } from "styled-components";
 import { ModalProvider } from "styled-react-modal";
 import withApolloClient from "../lib/apollo/with-apollo-client";
 import { ApolloProvider } from "react-apollo";
@@ -79,19 +78,21 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, reduxStore, apolloClient } = this.props;
+    console.log("initial state = ", reduxStore.getState());
     return (
       <Container>
         <Provider store={reduxStore}>
           <ApolloProvider client={apolloClient}>
-            <ThemeProvider theme={theme}>
-              <ModalProvider>
-                <BaseLayout
-                  title={"Proyecto base"}
-                  description={"Proyecto base"}
-                />
+            <ModalProvider>
+              <BaseLayout
+                title={"Styled Theme"}
+                description={
+                  "Generador de tema de estilos para styled components"
+                }
+              >
                 <Component {...pageProps} />
-              </ModalProvider>
-            </ThemeProvider>
+              </BaseLayout>
+            </ModalProvider>
           </ApolloProvider>
         </Provider>
       </Container>
