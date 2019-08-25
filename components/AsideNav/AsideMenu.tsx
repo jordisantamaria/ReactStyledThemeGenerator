@@ -32,6 +32,24 @@ const AsideMenu = (props: IProps) => {
       >
         Botones
       </AsideItem>
+      <AsideItem
+      href={"/theme/cards"}
+      isActive={props.router.pathname === "/theme/cards"}
+      >
+        Cards
+      </AsideItem>
+      <AsideItem
+      href={"/theme/nav"}
+      isActive={props.router.pathname === "/theme/nav"}
+      >
+        Nav
+      </AsideItem>
+      <AsideItem
+      href={"/theme/forms"}
+      isActive={props.router.pathname === "/theme/forms"}
+      >
+        Formularios
+      </AsideItem>
     </ResponsiveBox>
   );
 };

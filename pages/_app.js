@@ -1,14 +1,14 @@
 import App, { Container } from "next/app";
 import React from "react";
-import { injectGlobal } from "styled-components";
 import { ModalProvider } from "styled-react-modal";
 import withApolloClient from "../lib/apollo/with-apollo-client";
 import { ApolloProvider } from "react-apollo";
 import BaseLayout from "../components/BaseLayout";
 import { Provider } from "react-redux";
 import withReduxStore from "../lib/redux/with-redux-store";
+import {createGlobalStyle} from 'styled-components';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   * { box-sizing: border-box; margin: 0; }
   body {
     margin: 0;
@@ -18,15 +18,15 @@ injectGlobal`
   }
   
   @font-face {
-  font-family: 'fontello';
-  src: url('/static/font/fontello.eot?34031553');
-  src: url('/static/font/fontello.eot?34031553#iefix') format('embedded-opentype'),
-       url('/static/font/fontello.woff2?34031553') format('woff2'),
-       url('/static/font/fontello.woff?34031553') format('woff'),
-       url('/static/font/fontello.ttf?34031553') format('truetype'),
-       url('/static/font/fontello.svg?34031553#fontello') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'fontello';
+    src: url('/static/font/fontello.eot?34031553');
+    src: url('/static/font/fontello.eot?34031553#iefix') format('embedded-opentype'),
+         url('/static/font/fontello.woff2?34031553') format('woff2'),
+         url('/static/font/fontello.woff?34031553') format('woff'),
+         url('/static/font/fontello.ttf?34031553') format('truetype'),
+         url('/static/font/fontello.svg?34031553#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
  
  [class^="icon-"]:before, [class*=" icon-"]:before {
@@ -83,6 +83,8 @@ class MyApp extends App {
       <Container>
         <Provider store={reduxStore}>
           <ApolloProvider client={apolloClient}>
+            <>
+              <GlobalStyle />
             <ModalProvider>
               <BaseLayout
                 title={"Styled Theme"}
@@ -93,6 +95,7 @@ class MyApp extends App {
                 <Component {...pageProps} />
               </BaseLayout>
             </ModalProvider>
+              </>
           </ApolloProvider>
         </Provider>
       </Container>
