@@ -1,13 +1,14 @@
 import * as React from "react";
 import AsideMenu from "../../components/AsideNav/AsideMenu";
 import { Box } from "../../components/UI/basic";
+import {Colors} from '../../lib/Colors';
 
 const ThemeLayout = props => {
   return (
     <>
       <AsideMenu />
       <Box
-        pt={3}
+        py={4}
         width={[1, "calc(100% - 200px)"]}
         ml={[0, "200px"]}
         px={[3, 4]}

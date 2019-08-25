@@ -10,6 +10,7 @@ import SpaceSection from "../../modules/theme/themeBasics/SpaceSection";
 import FontsSection from "../../modules/theme/themeBasics/FontsSection";
 import FontSizesSection from "../../modules/theme/themeBasics/FontSizesSection";
 import BreakpointsSection from "../../modules/theme/themeBasics/BreakpointsSections";
+import {Colors} from '../../lib/Colors';
 
 interface IProps {
   setSpace: (space) => void;
@@ -21,7 +22,7 @@ const Index = (props: IProps) => {
   console.log("colors = ", Object.keys(props.theme.colors));
   return (
     <ThemeLayout>
-      <Heading>Aspectos basicos del tema</Heading>
+      <Heading pb={2}>Aspectos basicos del tema</Heading>
       <ColorsSection colors={props.theme.colors} />
       <SpaceSection space={props.theme.space} />
       <FontsSection fonts={props.theme.fonts} />

@@ -13,23 +13,12 @@ const NavbarLink = (props: INavbarLink) => {
     <LinkStyled
       {...props}
       href={props.href}
-      css={{
-        ":hover": {
-          backgroundColor: Colors.primaryDark
-        }
-      }}
     >
       {props.children}
     </LinkStyled>
   ) : (
     <Box
       {...props}
-      css={{
-        cursor: "pointer",
-        ":hover": {
-          backgroundColor: Colors.primaryDark
-        }
-      }}
     >
       {props.children}
     </Box>

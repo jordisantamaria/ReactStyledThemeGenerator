@@ -10,7 +10,6 @@ const AsideItem = (props: IAsideItem) => {
     <LinkStyled
       href={props.href}
       as={props.as}
-      bg={props.isActive ? Colors.secondary : Colors.secondaryDark}
       p={"10px 10px 10px 20px"}
       color={Colors.white}
       onClick={props.onClick}

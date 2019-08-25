@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Flex, Heading, Panel } from "../../../components/UI/basic";
+import {Box, Flex, Heading, Panel} from '../../../components/UI/basic';
 import TextStyled from "../../../components/UI/basic/Text";
+import SectionContainer from './SectionContainer';
 
 interface IProps {
   fonts: Object;
@@ -8,8 +9,8 @@ interface IProps {
 
 const FontsSection = (props: IProps) => {
   return (
-    <>
-      <Heading fontSize={18} mt={3} p={2}>
+    <SectionContainer>
+      <Heading fontSize={18} p={2}>
         Fuentes
       </Heading>
       <Flex flexWrap={"wrap"}>
@@ -22,7 +23,7 @@ const FontsSection = (props: IProps) => {
           );
         })}
       </Flex>
-    </>
+    </SectionContainer>
   );
 };
 

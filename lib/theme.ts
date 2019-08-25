@@ -24,11 +24,11 @@ export default {
   buttons: {
     primary: {
       color: Colors.white,
-      backgroundColor: Colors.secondary
+      backgroundColor: Colors.primaryDark
     },
     primaryRounded: {
       color: Colors.white,
-      backgroundColor: Colors.secondary,
+      backgroundColor: Colors.primary,
       borderRadius: "10em"
     },
     outline: {

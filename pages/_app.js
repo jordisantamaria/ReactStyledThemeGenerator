@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   * { box-sizing: border-box; margin: 0; }
   body {
     margin: 0;
-    background-color: #F8F7FF;
+    background-color: #fff;
     color: #3e3e3e;
     font-family: 'Roboto Slab', serif;
   }
