@@ -1,12 +1,13 @@
-import * as React from 'react';
-import {Box, Heading} from '../components/UI/basic';
-import AsideMenu from '../components/AsideNav/AsideMenu';
-import {connect} from 'react-redux';
-import {setSpace} from '../lib/redux/ThemeActions';
+import * as React from "react";
+import { Box, Heading } from "../components/UI/basic";
+import AsideMenu from "../components/AsideNav/AsideMenu";
+import { connect } from "react-redux";
+import { setSpace } from "../lib/redux/ThemeActions";
 
 interface IIndex {
   setSpace: (space) => void;
 }
+
 const Theme = (props: IIndex) => {
   return (
     <>

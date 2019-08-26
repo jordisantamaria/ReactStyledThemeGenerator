@@ -4,7 +4,7 @@ import TextStyled from "../../../components/UI/basic/Text";
 import SectionContainer from './SectionContainer';
 
 interface IProps {
-  breakpoints: number[];
+  breakpoints: string[];
 }
 
 const BreakpointsSection = (props: IProps) => {

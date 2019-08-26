@@ -12,12 +12,12 @@ const Nav = ({ login, logout, isAuthenticated }) => {
           css={{boxShadow: '0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}
             px={3} py={10}
       >
-          <NavbarLink px={10} href={"/Admin"} color={Colors.primaryDark} css={{fontWeight: 'bold'}}>
+          <NavbarLink px={10} href={"/Admin"}>
             <Button variant={'primary'}>
               Descargar
             </Button>
           </NavbarLink>
-          <NavbarLink px={10} href={"/StudyVocabulary"} color={Colors.primaryDark} css={{fontWeight: 'bold'}}>
+          <NavbarLink px={10} href={"/StudyVocabulary"} >
             <Button variant={'primary'}>
               Guardar
             </Button>

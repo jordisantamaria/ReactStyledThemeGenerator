@@ -68,6 +68,8 @@ class BaseLayout extends React.Component<ILayoutProps> {
   };
 
   public render() {
+
+    console.log('component updated theme = ', this.props.theme);
     return (
       <ThemeProvider theme={this.props.theme}>
         <React.Fragment>

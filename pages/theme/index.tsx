@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Button, Heading } from "../../components/UI/basic";
+import { Heading } from "../../components/UI/basic";
 import { connect } from "react-redux";
 import { ITheme, setSpace } from "../../lib/redux/ThemeActions";
 import { RouterProps, withRouter } from "next/router";
@@ -10,7 +10,6 @@ import SpaceSection from "../../modules/theme/themeBasics/SpaceSection";
 import FontsSection from "../../modules/theme/themeBasics/FontsSection";
 import FontSizesSection from "../../modules/theme/themeBasics/FontSizesSection";
 import BreakpointsSection from "../../modules/theme/themeBasics/BreakpointsSections";
-import {Colors} from '../../lib/Colors';
 
 interface IProps {
   setSpace: (space) => void;

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import AsideItem from './AsideItem';
 import {Box, Heading} from '../../components/UI/basic';
-import {Colors} from '../../lib/Colors';
 import {MediaQueries} from '../../lib/Breakpoints';
 import styled from 'styled-components';
 import {RouterProps, withRouter} from 'next/router';
@@ -19,11 +18,22 @@ const ResponsiveBox = styled(Box)`
 const AsideMenu = (props: IProps) => {
   return (
     <ResponsiveBox
-      bg={Colors.primary}
+      bg={'primary'}
       width={"200px"}
-      css={{ position: "fixed", height: "100%", top: 0 }}
+      css={{
+        position: "fixed",
+        height: "100%",
+        top: 0,
+        boxShadow: "0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)"
+      }}
     >
-      <Heading  p={"12px 10px 12px 20px"} mb={2} color={'white'} borderBottom={'1px solid #ffffff47'} css={{height: '52px'}}>
+      <Heading
+        p={"12px 10px 12px 20px"}
+        mb={2}
+        color={"white"}
+        borderBottom={"1px solid #ffffff47"}
+        css={{ height: "52px" }}
+      >
         Styled Theme
       </Heading>
 
@@ -55,14 +65,14 @@ const AsideMenu = (props: IProps) => {
         Formularios
       </AsideItem>
       <AsideItem
-      href={"/theme/forms"}
-      isActive={props.router.pathname === "/theme/forms"}
+        href={"/theme/forms"}
+        isActive={props.router.pathname === "/theme/forms"}
       >
         Tablas
       </AsideItem>
       <AsideItem
-      href={"/theme/forms"}
-      isActive={props.router.pathname === "/theme/forms"}
+        href={"/theme/forms"}
+        isActive={props.router.pathname === "/theme/forms"}
       >
         Modals
       </AsideItem>

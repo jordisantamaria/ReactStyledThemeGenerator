@@ -1,7 +1,6 @@
 import * as React from "react";
 import AsideMenu from "../../components/AsideNav/AsideMenu";
 import { Box } from "../../components/UI/basic";
-import {Colors} from '../../lib/Colors';
 
 const ThemeLayout = props => {
   return (

@@ -17,6 +17,8 @@ import { Field } from "react-final-form";
 import TextStyled, { IText } from "../basic/Text";
 import { Box } from "../basic";
 import { Colors } from "../../../lib/Colors";
+import {useState} from 'react';
+import {INumberArrayValue} from '../../../lib/redux/ThemeActions';
 
 export interface IField {
   name: string;
@@ -30,8 +32,8 @@ export interface IInputStyled extends IText, IField {
 }
 
 export interface IInputControlled extends IText, IField {
-  placeholder: string;
-  onChange: (event) => void;
+  placeholder?: string;
+  onChange?: (event) => void;
 }
 
 const css = props => props.css;
@@ -58,7 +60,16 @@ const InputStyled2 = styled.input(
 );
 
 export const InputControlled = (props: IInputControlled) => {
-  return <InputStyled2 {...props} />;
+
+  const {onChange, value, ...otherProps} = props;
+  const [valueState, setValue] = useState(value);
+
+  const onChangeInput = (event) => {
+    setValue(event.target.value);
+    onChange(event.target.value);
+  }
+
+  return <InputStyled2 {...otherProps} onChange={onChangeInput} value={valueState}/>;
 };
 
 const InputStyled = (props: IInputStyled) => {

@@ -1,14 +1,12 @@
-import * as React from "react";
-import TextStyled from "../../components/UI/basic/Text";
-import { Colors } from "../../lib/Colors";
+import * as React from 'react';
+import TextStyled from '../../components/UI/basic/Text';
 
 const AsideTitle = props => {
   return (
     <TextStyled
-      bg={Colors.secondaryDark}
       py={"10px"}
       px={3}
-      color={Colors.white}
+      color={'white'}
     >
       {props.children}
     </TextStyled>
