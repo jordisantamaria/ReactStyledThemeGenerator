@@ -1,6 +1,6 @@
 import * as React from "react";
 import ThemeLayout from "../../modules/theme/ThemeLayout";
-import { Box, Button, Flex, Heading, Panel } from "../../components/UI/basic";
+import { Button, Flex, Heading, Panel } from "../../components/UI/basic";
 import { IState } from "../../lib/redux/rootReducer";
 import { withRouter } from "next/router";
 import { connect } from "react-redux";

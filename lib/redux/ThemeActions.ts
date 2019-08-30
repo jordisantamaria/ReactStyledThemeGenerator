@@ -9,6 +9,7 @@ export interface IThemeAction {
 }
 
 interface IPayload {
+  name?: string;
   fontSizes?: INumberArrayValue;
   colors?: Object;
   space?: INumberArrayValue;
@@ -26,6 +27,7 @@ export interface INumberArrayValue {
 
 
 export interface ITheme {
+  name?: string;
   fontSizes?: number[];
   colors?: Object;
   space?: number[];

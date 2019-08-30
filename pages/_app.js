@@ -2,7 +2,7 @@ import App, { Container } from "next/app";
 import React from "react";
 import { ModalProvider } from "styled-react-modal";
 import withApolloClient from "../lib/apollo/with-apollo-client";
-import { ApolloProvider } from "react-apollo";
+import {ApolloProvider} from '@apollo/react-hooks';
 import BaseLayout from "../components/BaseLayout";
 import { Provider } from "react-redux";
 import withReduxStore from "../lib/redux/with-redux-store";

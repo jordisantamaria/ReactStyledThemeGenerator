@@ -8,7 +8,10 @@ import {
 } from './ThemeActions';
 import theme from "../theme";
 
-export const initialState: ITheme = theme;
+export const initialState: ITheme = {
+  name: 'Default theme',
+  ...theme
+};
 
 function ThemeReducer(state = initialState, action: IThemeAction) {
   switch (action.type) {

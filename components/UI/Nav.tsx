@@ -1,11 +1,70 @@
-import * as React from "react";
-import Flex from "./basic/Flex";
-import Sticky from "./advanced/Sticky";
-import NavbarLink from "./NavbarLink";
+import * as React from 'react';
+import Flex from './basic/Flex';
+import Sticky from './advanced/Sticky';
+import NavbarLink from './NavbarLink';
 import {Button} from './basic';
-import {Colors} from '../../lib/Colors';
+import {useMutation} from '@apollo/react-hooks';
+import {gql} from 'apollo-boost';
+import {withRouter} from 'next/router';
+import {connect} from 'react-redux';
+import {IState} from '../../lib/redux/rootReducer';
+import {ITheme} from '../../lib/redux/ThemeActions';
 
-const Nav = ({ login, logout, isAuthenticated }) => {
+/*export const SAVE_THEME_MUTATION = gql`
+  mutation saveTheme(
+    $theme: NewTheme
+  ) {
+    saveTheme(theme: $theme) {
+      name
+      fontSizes
+      space
+      breakpoints
+    }
+  }
+`;*/
+
+export const SAVE_THEME_MUTATION = gql`
+  mutation saveTheme(
+    $name: String
+    $fontSizes: [Int]
+    $space: [Int]
+    $breakpoints: [String]
+  ) {
+    saveTheme(name: $name, fontSizes: $fontSizes, space: $space, breakpoints: $breakpoints) {
+      name
+      fontSizes
+      space
+      breakpoints
+    }
+  }
+`;
+
+interface IProps {
+  login: () => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+  theme: ITheme;
+}
+const Nav = ({ login, logout, isAuthenticated, theme }: IProps) => {
+
+  const [saveTheme] = useMutation(SAVE_THEME_MUTATION);
+
+  const handleSaveClick = () => {
+    /*const savedTheme = {
+      name: 'Default theme',
+      fontSizes: theme.fontSizes,
+      space: theme.space,
+      breakpoints: theme.breakpoints
+    }*/
+    saveTheme({
+      variables: {
+        name: theme.name,
+        fontSizes: theme.fontSizes,
+        space: theme.space,
+        breakpoints: theme.breakpoints
+      }
+    });
+  }
   return (
     <Sticky bg={'white'} css={{top: 0}}>
       <Flex m={"auto"} justifyContent={"flex-end"} alignItems={'center'}
@@ -17,11 +76,16 @@ const Nav = ({ login, logout, isAuthenticated }) => {
               Descargar
             </Button>
           </NavbarLink>
-          <NavbarLink px={10} href={"/StudyVocabulary"} >
-            <Button variant={'primary'}>
-              Guardar
-            </Button>
-          </NavbarLink>
+          <Button variant={'primary'} onClick={handleSaveClick}>
+            Guardar
+          </Button>
+          {isAuthenticated && (
+            <NavbarLink px={10} href={"/myThemes"}>
+              <Button variant={'primary'}>
+                Mis temas
+              </Button>
+            </NavbarLink>
+          )  }
           {isAuthenticated === true ? (
             <NavbarLink px={10} onClick={logout}>
               Cierra sesión
@@ -38,4 +102,13 @@ const Nav = ({ login, logout, isAuthenticated }) => {
   );
 };
 
-export default Nav;
+const mapStateToProps = (state: IState, ownProps) => {
+  return {
+    ...ownProps,
+    theme: state.theme
+  };
+};
+
+export default connect(
+mapStateToProps
+)(withRouter(Nav));
