@@ -29,7 +29,8 @@ const css = props => props.css;
 
 const FlexStyled = styled.div(
   {
-    display: "flex"
+    display: "flex",
+    flexWrap: "wrap"
   },
   space,
   color,

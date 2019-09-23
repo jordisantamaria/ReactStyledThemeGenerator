@@ -5,7 +5,7 @@ import NavbarLink from './NavbarLink';
 import {Button} from './basic';
 import {useMutation} from '@apollo/react-hooks';
 import {gql} from 'apollo-boost';
-import {withRouter} from 'next/router';
+import {RouterProps, withRouter} from 'next/router';
 import {connect} from 'react-redux';
 import {IState} from '../../lib/redux/rootReducer';
 import {ITheme} from '../../lib/redux/ThemeActions';
@@ -44,8 +44,9 @@ interface IProps {
   logout: () => void;
   isAuthenticated: boolean;
   theme: ITheme;
+  router?: RouterProps;
 }
-const Nav = ({ login, logout, isAuthenticated, theme }: IProps) => {
+const Nav = ({ login, logout, isAuthenticated, theme, router }: IProps) => {
 
   const [saveTheme] = useMutation(SAVE_THEME_MUTATION);
 
@@ -65,33 +66,41 @@ const Nav = ({ login, logout, isAuthenticated, theme }: IProps) => {
       }
     });
   }
+
   return (
     <Sticky bg={'white'} css={{top: 0}}>
       <Flex m={"auto"} justifyContent={"flex-end"} alignItems={'center'}
           css={{boxShadow: '0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}
             px={3} py={10}
       >
-          <NavbarLink px={10} href={"/Admin"}>
+          <NavbarLink px={2} href={"/download"}>
             <Button variant={'primary'}>
               Descargar
             </Button>
           </NavbarLink>
-          <Button variant={'primary'} onClick={handleSaveClick}>
+          <Button mx={2} variant={'primary'} onClick={handleSaveClick}>
             Guardar
           </Button>
-          {isAuthenticated && (
+        <NavbarLink px={2} href={"/myThemes"}>
+          <Button variant={router.pathname === '/myThemes' ? 'primaryLight' : 'primary'}>
+            Mis temas
+          </Button>
+        </NavbarLink>
+          {/*{isAuthenticated && (
             <NavbarLink px={10} href={"/myThemes"}>
               <Button variant={'primary'}>
                 Mis temas
               </Button>
             </NavbarLink>
-          )  }
+          )  }*/}
           {isAuthenticated === true ? (
-            <NavbarLink px={10} onClick={logout}>
-              Cierra sesión
+            <NavbarLink px={2} onClick={logout}>
+              <Button variant={'primary'}>
+                Cerrar sesión
+              </Button>
             </NavbarLink>
           ) : (
-            <NavbarLink px={10} onClick={login}>
+            <NavbarLink px={2} onClick={login}>
               <Button variant={'primary'}>
                 Inicia sesión
               </Button>

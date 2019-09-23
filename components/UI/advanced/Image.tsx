@@ -3,7 +3,7 @@ import { IBox } from "../basic/Box";
 import sys from "system-components";
 
 interface IImage extends IBox {
-  src?: string;
+  src: string;
   borderRadius?: string;
   display?: string;
   maxWidth?: string;
@@ -24,7 +24,9 @@ const ImageStyled = sys(
 );
 
 const Image = (props: IImage) => {
-  return <ImageStyled {...props} />;
+  const imagesPath = '/static/';
+  const {src, ...otherProps} = props;
+  return <ImageStyled src={imagesPath + src} {...otherProps} />;
 };
 
 export default Image;

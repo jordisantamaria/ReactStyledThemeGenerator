@@ -29,6 +29,8 @@ export interface IField {
 export interface IInputStyled extends IText, IField {
   placeholder: string;
   labelText?: string;
+  labelStyles?: any;
+  inputStyles?: any;
 }
 
 export interface IInputControlled extends IText, IField {
@@ -80,6 +82,8 @@ const InputStyled = (props: IInputStyled) => {
     type,
     value,
     labelText,
+    labelStyles,
+    inputStyles,
     ...otherProps
   } = props;
 
@@ -93,13 +97,14 @@ const InputStyled = (props: IInputStyled) => {
     <Field name={name} validate={props.validate}>
       {({ input, meta }) => (
         <Box {...otherProps}>
-          {labelText && <label htmlFor={props.name}>{labelText}</label>}
+          {labelText && <label htmlFor={props.name} style={labelStyles}>{labelText}</label>}
           <InputStyled2
             {...input}
             placeholder={placeholder}
             type={type}
             border={borderStyles(meta)}
             id={name}
+            css={inputStyles}
           />
           {meta.dirty && meta.error && (
             <TextStyled textStyle={"error"}>{meta.error}</TextStyled>

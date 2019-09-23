@@ -53,8 +53,8 @@ const AsideMenu = (props: IProps) => {
         Cards & Panels
       </AsideItem>
       <AsideItem
-        href={"/theme/nav"}
-        isActive={props.router.pathname === "/theme/nav"}
+        href={"/theme/navs"}
+        isActive={props.router.pathname === "/theme/navs"}
       >
         Navs & Tabs
       </AsideItem>
@@ -65,8 +65,8 @@ const AsideMenu = (props: IProps) => {
         Formularios
       </AsideItem>
       <AsideItem
-        href={"/theme/forms"}
-        isActive={props.router.pathname === "/theme/forms"}
+        href={"/theme/tables"}
+        isActive={props.router.pathname === "/theme/tables"}
       >
         Tablas
       </AsideItem>

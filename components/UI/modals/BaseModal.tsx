@@ -50,10 +50,11 @@ const BaseModal = (props: IBaseModal) => {
       {...otherProps}
     >
       <Panel
-        colors="primary"
+        bg="primary"
         justifyContent={"center"}
         p={3}
         position={"relative"}
+        borderRadius={0}
         css={headerStyles}
       >
         {titleComponent}

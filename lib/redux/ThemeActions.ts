@@ -27,6 +27,7 @@ export interface INumberArrayValue {
 
 
 export interface ITheme {
+  id?: string;
   name?: string;
   fontSizes?: number[];
   colors?: Object;

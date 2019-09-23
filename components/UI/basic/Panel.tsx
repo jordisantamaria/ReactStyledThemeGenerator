@@ -45,18 +45,19 @@ const PanelStyled = styled.div(
   flexWrap,
   alignItems,
   borderRadius,
-  boxShadow,
+  boxShadow ,
   colorStyle,
   css
 );
 
 const Panel: React.FC<IPanel> = (props: IPanel) => {
-  return <PanelStyled {...props} />;
+  return <PanelStyled {...props}  />;
 };
 
 Panel.defaultProps = {
   p: 2,
-  borderRadius: 2
+  borderRadius: 2,
+  boxShadow: "small",
 };
 
 export default Panel;
