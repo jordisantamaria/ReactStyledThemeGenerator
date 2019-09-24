@@ -18,7 +18,6 @@ import TextStyled, { IText } from "../basic/Text";
 import { Box } from "../basic";
 import { Colors } from "../../../lib/Colors";
 import {useState} from 'react';
-import {INumberArrayValue} from '../../../lib/redux/ThemeActions';
 
 export interface IField {
   name: string;

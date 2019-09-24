@@ -2,7 +2,7 @@ import * as React from "react";
 import { IBox } from "../basic/Box";
 import sys from "system-components";
 
-interface IImage extends IBox {
+export interface IImage extends IBox {
   src: string;
   borderRadius?: string;
   display?: string;
@@ -20,13 +20,12 @@ const ImageStyled = sys(
   },
   "space",
   "width",
-  "color"
+  "color",
+  "borderRadius"
 );
 
 const Image = (props: IImage) => {
-  const imagesPath = '/static/';
-  const {src, ...otherProps} = props;
-  return <ImageStyled src={imagesPath + src} {...otherProps} />;
+  return <ImageStyled {...props} />;
 };
 
 export default Image;

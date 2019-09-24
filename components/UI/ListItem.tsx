@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Panel } from "./basic";
-import { IPanel } from "./basic/Panel";
+import { IPanel } from "./advanced/Card/Panel";
 
 interface IProps extends IPanel {
   children: any;

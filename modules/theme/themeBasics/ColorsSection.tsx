@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Flex, Heading, Panel } from "../../../components/UI/basic";
+import {Box, Flex, Heading} from '../../../components/UI/basic';
 import TextStyled from "../../../components/UI/basic/Text";
 import SectionContainer from "./SectionContainer";
 import ColorPickerInput from "../../../components/UI/Forms/ColorPickerInput";
@@ -17,10 +17,10 @@ const ColorsSection = (props: IProps) => {
       <Flex flexWrap={"wrap"}>
         {Object.keys(props.colors).map(value => {
           return (
-            <Panel width={180}>
+            <Box p={2} width={180}>
               <TextStyled>{value}</TextStyled>
               <ColorPickerInput colorKey={value} color={props.colors[value]} />
-            </Panel>
+            </Box>
           );
         })}
       </Flex>

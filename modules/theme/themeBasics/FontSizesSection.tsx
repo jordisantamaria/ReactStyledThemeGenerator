@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {Flex, Heading, Panel} from '../../../components/UI/basic';
+import {Box, Flex, Heading} from '../../../components/UI/basic';
 import SectionContainer from './SectionContainer';
 import {InputControlled} from '../../../components/UI/Forms/InputStyled';
 import {INumberArrayValue, setThemeFontSize} from '../../../lib/redux/ThemeActions';
 import {connect} from 'react-redux';
+import Card from '../../../components/UI/advanced/Card/Card';
 
 interface IProps {
   fontSizes: number[];
@@ -31,9 +32,9 @@ const FontSizesSection = (props: IProps) => {
       <Flex flexWrap={"wrap"}>
         {props.fontSizes.map((value, index) => {
           return (
-            <Panel width={180}>
+            <Box p={2} width={180}>
               <InputControlled name={`fontsize${index}`} value={`${value}`} onChange={onChangeInput.bind(this, index)}/>
-            </Panel>
+            </Box>
           );
         })}
       </Flex>

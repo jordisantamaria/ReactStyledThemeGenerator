@@ -1,6 +1,6 @@
 import Modal from "styled-react-modal";
 import * as React from "react";
-import Panel from "../basic/Panel";
+import CardBody from "../advanced/Card/Panel";
 import Icon from "../basic/Icon";
 import { space } from "styled-system";
 const StyledModal = Modal.styled`
@@ -49,7 +49,7 @@ const BaseModal = (props: IBaseModal) => {
       onEscapeKeydown={toggleModal}
       {...otherProps}
     >
-      <Panel
+      <CardBody
         bg="primary"
         justifyContent={"center"}
         p={3}
@@ -65,7 +65,7 @@ const BaseModal = (props: IBaseModal) => {
           css={{ right: "20px" }}
           onClick={toggleModal}
         />
-      </Panel>
+      </CardBody>
       {children}
     </StyledModal>
   );

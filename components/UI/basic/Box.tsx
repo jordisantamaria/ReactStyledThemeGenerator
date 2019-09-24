@@ -6,7 +6,9 @@ import {
   position,
   space,
   width,
-  colorStyle
+  colorStyle,
+  boxShadow,
+  borderRadius
 } from "styled-system";
 
 export interface IBox {
@@ -41,6 +43,7 @@ export interface IBox {
   as?: string;
   onClick?: () => void;
   backgroundImage?: string;
+  boxShadow?: any;
   height?: string;
   colors?: string;
   key?: any;
@@ -69,6 +72,8 @@ const BoxStyled = styled.div`
   ${borders}
   ${colorStyle}
   ${css}
+  ${boxShadow}
+  ${borderRadius}
 `;
 
 const Box = (props: IBox) => {

@@ -1,11 +1,11 @@
-import * as React from "react";
-import ThemeLayout from "../../modules/theme/ThemeLayout";
-import { Button, Flex, Heading, Panel } from "../../components/UI/basic";
-import { IState } from "../../lib/redux/rootReducer";
-import { withRouter } from "next/router";
-import { connect } from "react-redux";
-import { ITheme } from "../../lib/redux/ThemeActions";
-import TextStyled from "../../components/UI/basic/Text";
+import * as React from 'react';
+import ThemeLayout from '../../modules/theme/ThemeLayout';
+import {Box, Button, Flex, Heading} from '../../components/UI/basic';
+import {IState} from '../../lib/redux/rootReducer';
+import {withRouter} from 'next/router';
+import {connect} from 'react-redux';
+import {ITheme} from '../../lib/redux/ThemeActions';
+import TextStyled from '../../components/UI/basic/Text';
 
 interface IProps {
   theme: ITheme;
@@ -18,10 +18,10 @@ const Buttons = (props: IProps) => {
       <Flex flexWrap={"wrap"}>
         {Object.keys(props.theme.buttons).map(value => {
           return (
-            <Panel width={180}>
+            <Box p={2} width={180}>
               <TextStyled>{value}</TextStyled>
               <Button variant={value}>Boton</Button>
-            </Panel>
+            </Box>
           );
         })}
       </Flex>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import Panel from "../basic/Panel";
+import CardBody from "../advanced/Card/Panel";
 
 export interface ITabActive {
   activeTab?: number;
@@ -14,7 +14,7 @@ const TabList = (props: IProps) => {
     props.setActiveTab(index);
   };
   return (
-    <Panel colors={"primaryLight"} borderRadius={"0px"} color={"black2"}>
+    <CardBody colors={"primaryLight"} borderRadius={"0px"} color={"black2"}>
       {props.children.map((el, index) => {
         return React.cloneElement(el, {
           isActiveTab: props.activeTab === index,
@@ -22,7 +22,7 @@ const TabList = (props: IProps) => {
           key: index
         });
       })}
-    </Panel>
+    </CardBody>
   );
 };
 

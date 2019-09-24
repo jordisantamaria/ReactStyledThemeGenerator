@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {Flex, Heading, Panel} from '../../../components/UI/basic';
+import {Box, Flex, Heading} from '../../../components/UI/basic';
 import SectionContainer from './SectionContainer';
 import {connect} from 'react-redux';
 import {InputControlled} from '../../../components/UI/Forms/InputStyled';
 import {INumberArrayValue, setSpace} from '../../../lib/redux/ThemeActions';
+import CardBody from '../../../components/UI/advanced/Card/CardBody';
 
 interface IProps {
   space: number[];
@@ -30,9 +31,9 @@ const SpaceSection = (props: IProps) => {
       <Flex flexWrap={"wrap"}>
         {props.space.map((value, index) => {
           return (
-            <Panel width={180}>
+            <Box p={2} width={180}>
               <InputControlled name={`space${index}`} value={`${value}`} onChange={onChangeInput.bind(this, index)}/>
-            </Panel>
+            </Box>
           );
         })}
       </Flex>

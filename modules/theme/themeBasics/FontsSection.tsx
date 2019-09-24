@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {Flex, Heading, Panel} from '../../../components/UI/basic';
+import {Box, Flex, Heading} from '../../../components/UI/basic';
 import TextStyled from '../../../components/UI/basic/Text';
 import SectionContainer from './SectionContainer';
 import {InputControlled} from '../../../components/UI/Forms/InputStyled';
 import {setThemeFontFamily} from '../../../lib/redux/ThemeActions';
 import {connect} from 'react-redux';
+import Card from '../../../components/UI/advanced/Card/Card';
 
 interface IProps {
   fonts: Object;
@@ -30,10 +31,10 @@ const FontsSection = (props: IProps) => {
       <Flex flexWrap={"wrap"}>
         {Object.keys(props.fonts).map(value => {
           return (
-            <Panel width={180}>
+            <Box p={2} width={180}>
               <TextStyled>{value}</TextStyled>
               <InputControlled name={value} value={props.fonts[value]} onChange={onChangeInput.bind(this, value)}/>
-            </Panel>
+            </Box>
           );
         })}
       </Flex>

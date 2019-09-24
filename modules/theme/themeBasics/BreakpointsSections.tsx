@@ -1,7 +1,9 @@
 import * as React from "react";
-import { Flex, Heading, Panel } from "../../../components/UI/basic";
+import {Box, Flex, Heading} from '../../../components/UI/basic';
 import TextStyled from "../../../components/UI/basic/Text";
 import SectionContainer from './SectionContainer';
+import Card from '../../../components/UI/advanced/Card/Card';
+import CardBody from '../../../components/UI/advanced/Card/CardBody';
 
 interface IProps {
   breakpoints: string[];
@@ -16,9 +18,9 @@ const BreakpointsSection = (props: IProps) => {
       <Flex flexWrap={"wrap"}>
         {props.breakpoints.map(value => {
           return (
-            <Panel width={180}>
+            <Box p={2} width={180}>
               <TextStyled>{value}</TextStyled>
-            </Panel>
+            </Box>
           );
         })}
       </Flex>
