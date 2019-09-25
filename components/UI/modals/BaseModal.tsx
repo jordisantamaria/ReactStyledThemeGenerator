@@ -1,8 +1,9 @@
-import Modal from "styled-react-modal";
-import * as React from "react";
-import CardBody from "../advanced/Card/Panel";
-import Icon from "../basic/Icon";
-import { space } from "styled-system";
+import Modal from 'styled-react-modal';
+import * as React from 'react';
+import Icon from '../basic/Icon';
+import {space} from 'styled-system';
+import {Flex} from '../basic';
+
 const StyledModal = Modal.styled`
   background-color: ${props => props.theme.colors.white};
   ${space}
@@ -49,7 +50,7 @@ const BaseModal = (props: IBaseModal) => {
       onEscapeKeydown={toggleModal}
       {...otherProps}
     >
-      <CardBody
+      <Flex
         bg="primary"
         justifyContent={"center"}
         p={3}
@@ -65,7 +66,7 @@ const BaseModal = (props: IBaseModal) => {
           css={{ right: "20px" }}
           onClick={toggleModal}
         />
-      </CardBody>
+      </Flex>
       {children}
     </StyledModal>
   );
