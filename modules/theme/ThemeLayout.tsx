@@ -6,12 +6,7 @@ const ThemeLayout = props => {
   return (
     <>
       <AsideMenu />
-      <Box
-        py={4}
-        width={[1, "calc(100% - 200px)"]}
-        ml={[0, "200px"]}
-        px={[3, 4]}
-      >
+      <Box py={4} width={["calc(100% - 200px)"]} ml={["200px"]} px={[3, 4]}>
         {props.children}
       </Box>
     </>

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import AsideItem from './AsideItem';
-import {Box, Heading} from '../../components/UI/basic';
-import {MediaQueries} from '../../lib/Breakpoints';
-import styled from 'styled-components';
-import {RouterProps, withRouter} from 'next/router';
+import * as React from "react";
+import AsideItem from "./AsideItem";
+import { Box, Heading } from "../../components/UI/basic";
+import { MediaQueries } from "../../lib/Breakpoints";
+import styled from "styled-components";
+import { RouterProps, withRouter } from "next/router";
 
 interface IProps {
   router?: RouterProps;
@@ -18,7 +18,7 @@ const ResponsiveBox = styled(Box)`
 const AsideMenu = (props: IProps) => {
   return (
     <ResponsiveBox
-      bg={'primary'}
+      bg={"primary"}
       width={"200px"}
       css={{
         position: "fixed",
@@ -39,6 +39,12 @@ const AsideMenu = (props: IProps) => {
 
       <AsideItem href={"/theme"} isActive={props.router.pathname === "/theme"}>
         Basico del tema
+      </AsideItem>
+      <AsideItem
+        href={"/theme/layout"}
+        isActive={props.router.pathname === "/theme/layout"}
+      >
+        Layout
       </AsideItem>
       <AsideItem
         href={"/theme/buttons"}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import CardBody from "../advanced/Card/Panel";
+import CardBody from '../advanced/Card/CardBody';
 
 export interface ITabActive {
   activeTab?: number;

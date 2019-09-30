@@ -1,7 +1,7 @@
 import React from "react";
 import InputStyled from "./InputStyled";
 import { renderWithProviders } from "../../../lib/testConfig/testUtils";
-import { fireEvent } from "react-testing-library";
+import { fireEvent } from "@testing-library/react";
 import { Form } from "react-final-form";
 import { FormStyled } from "../basic";
 import { axe } from "jest-axe";

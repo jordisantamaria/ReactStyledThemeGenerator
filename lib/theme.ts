@@ -12,7 +12,11 @@ export default {
     small: "0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)",
     large: "0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15)"
   },
-  breakpoints: [Breakpoints.small, Breakpoints.medium, Breakpoints.large],
+  breakpoints: [
+    Breakpoints.tablet,
+    Breakpoints.desktop,
+    Breakpoints.desktopLarge
+  ],
   textStyles: {
     caps: {
       textTransform: "uppercase",
