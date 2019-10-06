@@ -2,32 +2,31 @@ Prettier:
 
 yarn pretty-quick
 
-Sequelize basado en la plantilla
+Sequelize based on template:
 https://github.com/sequelize/express-example
 
-**Tecnologias usadas:**
+**Technologies used:**
 
 Nextjs: SSR
 React: SPA
-Graphql: Per demanar nomes les dades necesaries a la api, una millor forma de treballar que api Rest
-AUTH0: Per a autentificar els usuaris de la forma mes segura possible
-Redux: Per a compartir la info de usuari en la app, es podria mirar de optimitzar perque no fos falta
-Lodash: Utilitats per fer servir amb arrays i objectes.
-Typescript: Per afegir tipat a javascript, sobretot util per a generar interficies de dades
-Babel: Transcriure el codi a javascript vanilla xk el navegador pugui interpretar-ho
-Nodemon: actualiza el servidor cuando hay algun cambio.
-jest: Testear el codi.
+Graphql: A better way to performance Api Rest, receiving only the data you need.
+AUTH0: To security autenticate users.
+Redux: To share the theme information to all the application.
+Lodash: Array & Objects utilities.
+Typescript: To generate iterfaces for props, being able to detect errors fasters and get better help from IDE.
+Babel: Transpile javascript to vanilla javascript, so the production hosting can read it.
+jest: For test code.
 
-**Com pujar a produccio:**
+**How to upload to production with heroku:**
 
 brew install heroku/brew/heroku
 heroku login
-heroku create nomProjecte
-en Procfile definir la comanda per a executar la app
+heroku create ProjectName
+Create a procfile file with the command to execute the project
 git push heroku master
 heroku open
 
-**Per executar la web:**
+**To execute web on development:**
 
 npm install
 npm start
