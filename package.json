@@ -33,7 +33,7 @@
     "apollo-link-context": "^1.0.17",
     "apollo-server": "^2.4.6",
     "apollo-server-express": "^2.4.6",
-    "auth0-js": "^9.10.0",
+    "auth0-js": "^9.13.2",
     "babel-jest": "^24.3.0",
     "babel-plugin-styled-components": "1.5.1",
     "babel-polyfill": "^6.26.0",
