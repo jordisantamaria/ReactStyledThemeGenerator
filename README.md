@@ -1,32 +1,41 @@
-Prettier:
+# Welcome to react-chat 👋
 
-yarn pretty-quick
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+[![Twitter: Jord1Santamaria](https://img.shields.io/twitter/follow/Jord1Santamaria.svg?style=social)](https://twitter.com/Jord1Santamar1a)
 
-Sequelize based on template:
-https://github.com/sequelize/express-example
+A website to try themes, by modifying aspects like colors and paddings.
 
-**Technologies used:**
 
-Nextjs: SSR
-React: SPA
-Graphql: A better way to performance Api Rest, receiving only the data you need.
-AUTH0: To security autenticate users.
-Redux: To share the theme information to all the application.
-Lodash: Array & Objects utilities.
-Typescript: To generate iterfaces for props, being able to detect errors fasters and get better help from IDE.
-Babel: Transpile javascript to vanilla javascript, so the production hosting can read it.
-jest: For test code.
+## Install
 
-**How to upload to production with heroku:**
-
-brew install heroku/brew/heroku
-heroku login
-heroku create ProjectName
-Create a procfile file with the command to execute the project
-git push heroku master
-heroku open
-
-**To execute web on development:**
-
+```sh
 npm install
-npm start
+```
+
+## Usage
+
+```sh
+npm run dev
+```
+
+### Deploy to Vercel
+
+Deploy this project on Vercel in one click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/jordisantamaria/ReactStyledThemeGenerator)
+
+## Author
+
+👤 **Jordi Santamaria**
+
+- Twitter: [@Jord1Santamaria](https://twitter.com/Jord1Santamaria)
+- Github: [@jordisantamaria](https://github.com/jordisantamaria)
+- LinkedIn: [@jordi-santamaria-portoles-8b14818b](https:/www.linkedin.com/in/jordi-santamaria-portoles-8b14818b/)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
