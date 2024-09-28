@@ -1,4 +1,4 @@
-# Welcome to react-chat 👋
+# Welcome to ReactStyledThemeGenerator 👋
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 [![Twitter: Jord1Santamaria](https://img.shields.io/twitter/follow/Jord1Santamaria.svg?style=social)](https://twitter.com/Jord1Santamar1a)
